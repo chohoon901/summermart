@@ -20,6 +20,22 @@ public class MyLike {
     @JoinColumn(name = "product_id")
     private Product product;
 
+    public void setMember(Member member){
+        if(this.member!=null) {
+            this.member.getMyLikes().remove(this);
+        }
+        this.member = member;
+        member.getMyLikes().add(this);
+    }
+
+    public void setProduct(Product product){
+        if(this.product!=null) {
+            this.product.getMyLikes().remove(this);
+        }
+        this.product = product;
+        product.getMyLikes().add(this);
+    }
+
     public static MyLike createMyLike(Product product) {
         MyLike myLike = new MyLike();
         myLike.setProduct(product);

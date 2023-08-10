@@ -22,6 +22,22 @@ public class Cart {
 
     private int count;
 
+    public void setMember(Member member){
+        if(this.member!=null) {
+            this.member.getCarts().remove(this);
+        }
+        this.member = member;
+        member.getCarts().add(this);
+    }
+
+    public void setProduct(Product product){
+        if(this.product!=null) {
+            this.product.getCarts().remove(this);
+        }
+        this.product = product;
+        product.getCarts().add(this);
+    }
+
     public static Cart createCart(Product product, int count) {
         Cart cart = new Cart();
         cart.setProduct(product);
