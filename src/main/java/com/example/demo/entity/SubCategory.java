@@ -14,10 +14,10 @@ public class SubCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-    @OneToMany(mappedBy = "subCategory")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "subCategory")
     private List<Product> product = new ArrayList<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "mainCategory_id")
     private MainCategory mainCategory;
 
