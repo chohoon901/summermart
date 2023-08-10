@@ -23,6 +23,14 @@ public class SubCategory {
 
     private String subName;
 
+    public void setMainCategory(MainCategory mainCategory){
+        if(this.mainCategory!=null) {
+            this.mainCategory.getSubCategory().remove(this);
+        }
+        this.mainCategory = mainCategory;
+        mainCategory.getSubCategory().add(this);
+    }
+
     public static SubCategory createSubCategory(MainCategory mainCategory, String subName) {
         SubCategory subCategory = new SubCategory();
         subCategory.setMainCategory(mainCategory);

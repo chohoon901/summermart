@@ -36,6 +36,14 @@ public class Product {
     private int price;
     private String picture;
 
+    public void setSubCategory(SubCategory subCategory){
+        if(this.subCategory!=null) {
+            this.subCategory.getProduct().remove(this);
+        }
+        this.subCategory = subCategory;
+        subCategory.getProduct().add(this);
+    }
+
     public void addStock(int quantity) {
         this.stock += quantity;
     }

@@ -21,7 +21,7 @@ public class Member {
     private List<Cart> carts = new ArrayList<>();
 
     @OneToMany(mappedBy = "member")
-    private List<MyLike> MyLikes = new ArrayList<>();
+    private List<MyLike> myLikes = new ArrayList<>();
 
     @OneToMany(mappedBy = "member")
     private List<Comment> comments = new ArrayList<>();
