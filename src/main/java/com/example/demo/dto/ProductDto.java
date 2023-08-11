@@ -4,16 +4,23 @@ import com.example.demo.entity.Product;
 import lombok.Data;
 
 @Data
-public class ProductDto {
-    private int stock;
+public class ProductDTO {
     private String name;
+    private int stock;
     private int price;
     private String picture;
+    private String subName;
+    private String mainName;
 
-    public ProductDto(Product product) {
-        stock = product.getStock();
-        name = product.getName();
-        price = product.getPrice();
+    public ProductDTO() {
+    }
+
+    public ProductDTO(Product product) {
+        mainName = product.getSubCategory().getMainCategory().getMainName();
+        subName = product.getSubCategory().getSubName();
         picture = product.getPicture();
+        name = product.getName();
+        stock = product.getStock();
+        price = product.getPrice();
     }
 }

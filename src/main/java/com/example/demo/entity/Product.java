@@ -27,7 +27,7 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private List<Comment> comments = new ArrayList<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "subCategory_id")
     private SubCategory subCategory;
 

@@ -1,18 +1,13 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.ProductDto;
+import com.example.demo.dto.ProductDTO;
 import com.example.demo.entity.Product;
 import com.example.demo.repository.ProductRepository;
 import com.example.demo.service.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
-import java.net.URI;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,6 +25,12 @@ public class ProductController {
     public void createProductDto(@RequestBody ProductDTO productDTO) {
         productService.createProduct(productDTO);
     }
+
+    @DeleteMapping
+
+    @PutMapping
+
+    @PatchMapping
 
     @GetMapping("/api3")
     public List<ProductDTO> getProduct() {
