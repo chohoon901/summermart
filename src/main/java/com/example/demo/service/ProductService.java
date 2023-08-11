@@ -8,6 +8,7 @@ import com.example.demo.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -30,11 +31,14 @@ public class ProductService {
     }
 
     public List<ProductDTO> getAllProducts() {
-        return productRepository.findAll()
-                .stream()
-                .map(p -> p != null ? new ProductDTO(p) : null)
-                .filter(obj -> Objects.nonNull(obj))
-                .collect(Collectors.toList());
+        List<ProductDTO> list = new ArrayList<>();
+        for (Product p : productRepository.findAll()) {
+            ProductDTO productDTO = p != null ? new ProductDTO(p) : null;
+            if (productDTO != null) {
+                list.add(productDTO);
+            }
+        }
+        return list;
     }
 
 

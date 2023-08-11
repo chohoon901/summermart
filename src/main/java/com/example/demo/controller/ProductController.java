@@ -28,8 +28,9 @@ public class ProductController {
 
     @DeleteMapping
 
+    // 전부 교체
     @PutMapping
-
+    // 하나만 교체
     @PatchMapping
 
     @GetMapping("/api3")
