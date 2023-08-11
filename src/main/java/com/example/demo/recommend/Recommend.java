@@ -1,4 +1,4 @@
-package com.example.demo.prod;
+package com.example.demo.recommend;
 
 import lombok.Data;
 
@@ -7,7 +7,7 @@ import javax.persistence.Id;
 
 @Data
 @Entity(name = "prod_tbl2")
-public class Prod {
+public class Recommend {
     @Id
     private int ID;
 
