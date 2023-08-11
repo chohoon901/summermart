@@ -28,13 +28,14 @@ public class Product {
     private List<Comment> comments = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "subCategory_id")
     private SubCategory subCategory;
 
     private int stock;
     private String name;
     private int price;
     private String picture;
+
 
     public void setSubCategory(SubCategory subCategory){
         if(this.subCategory!=null) {
