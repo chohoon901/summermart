@@ -36,7 +36,6 @@ public class Product {
     private int price;
     private String picture;
 
-
     public void setSubCategory(SubCategory subCategory){
         if(this.subCategory!=null) {
             this.subCategory.getProduct().remove(this);

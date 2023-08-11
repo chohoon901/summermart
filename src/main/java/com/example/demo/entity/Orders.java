@@ -32,7 +32,6 @@ public class Orders {
     private int count;
     private LocalDateTime date;
 
-
     public void setMember(Member member){
         if(this.member!=null) {
             this.member.getOrders().remove(this);
@@ -58,4 +57,6 @@ public class Orders {
         orders.setDate(LocalDateTime.now());
         return orders;
     }
+
 }
+
