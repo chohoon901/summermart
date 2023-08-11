@@ -31,14 +31,19 @@ public class ProductService {
     }
 
     public List<ProductDTO> getAllProducts() {
-        List<ProductDTO> list = new ArrayList<>();
-        for (Product p : productRepository.findAll()) {
-            ProductDTO productDTO = p != null ? new ProductDTO(p) : null;
-            if (productDTO != null) {
-                list.add(productDTO);
-            }
-        }
-        return list;
+        return productRepository.findAll()
+                .stream()
+                .map(p -> p != null ? new ProductDTO(p) : null)
+                .filter(obj -> Objects.nonNull(obj))
+                .collect(Collectors.toList());
+//        List<ProductDTO> list = new ArrayList<>();
+//        for (Product p : productRepository.findAll()) {
+//            ProductDTO productDTO = p != null ? new ProductDTO(p) : null;
+//            if (productDTO != null) {
+//                list.add(productDTO);
+//            }
+//        }
+//        return list;
     }
 
 
