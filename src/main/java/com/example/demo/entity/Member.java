@@ -30,7 +30,8 @@ public class Member {
     private String address;
     private String memberId;
     private String memberPw;
-    private String name;
+    @Column(name = "member")
+    private String memberName;
     private String phone;
     private String roles;
 }
