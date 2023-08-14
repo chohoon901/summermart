@@ -36,7 +36,6 @@ public class ProductService {
                 .map(p -> p != null ? new ProductDTO(p) : null)
                 .filter(obj -> Objects.nonNull(obj))
                 .collect(Collectors.toList());
-
     }
 
 

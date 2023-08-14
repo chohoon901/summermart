@@ -14,7 +14,6 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-    // 외래키
     @OneToMany(mappedBy = "member")
     private List<Orders> orders = new ArrayList<>();
 
@@ -30,8 +29,7 @@ public class Member {
     private String address;
     private String memberId;
     private String memberPw;
-    @Column(name = "member")
-    private String memberName;
+    private String name;
     private String phone;
     private String roles;
 }
