@@ -14,6 +14,7 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
+    // 외래키
     @OneToMany(mappedBy = "member")
     private List<Orders> orders = new ArrayList<>();
 
