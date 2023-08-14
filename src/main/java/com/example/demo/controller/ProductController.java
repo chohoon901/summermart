@@ -16,23 +16,23 @@ public class ProductController {
     private final ProductRepository productRepository;
     private final ProductService productService;
 
-    @PostMapping("/api")
+    @PostMapping("/create_product")
     public void createProduct(@RequestBody Product product) {
         productRepository.save(product);
     }
 
-    @PostMapping("/api2")
+    @PostMapping("/post_productDTO")
     public void createProductDto(@RequestBody ProductDTO productDTO) {
         productService.createProduct(productDTO);
     }
 
-    @DeleteMapping
+//    @DeleteMapping
+//
+//    @PutMapping
+//
+//    @PatchMapping
 
-    @PutMapping
-
-    @PatchMapping
-
-    @GetMapping("/api3")
+    @GetMapping("/get_product")
     public List<ProductDTO> getProduct() {
         return productService.getAllProducts();
     }
@@ -69,4 +69,6 @@ public class ProductController {
 //    public List<Product> getAllProduct() {
 //        return productService.getAllProducts();
 //    }
+
+
 }
