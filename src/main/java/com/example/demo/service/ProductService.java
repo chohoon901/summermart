@@ -38,6 +38,7 @@ public class ProductService {
     }
 
 
+
     // 모든 상품 정보 조회
     public List<Product> getAllProducts_old() {
         return productRepository.findAll();

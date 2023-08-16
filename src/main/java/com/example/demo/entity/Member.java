@@ -1,9 +1,11 @@
 package com.example.demo.entity;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Entity
@@ -27,9 +29,22 @@ public class Member {
     private List<Comment> comments = new ArrayList<>();
 
     private String address;
-    private String memberId;
-    private String memberPw;
+    private String username;
+    private String password;
     private String name;
     private String phone;
     private String roles;
+    private String providerId;
+    private String provider;
+
+    public static Member createOauthMember(String username, String password, String provider, String providerId, String roles) {
+        Member member = new Member();
+        member.setUsername(username);
+        member.setPassword(password);
+        member.setProvider(provider);
+        member.setProviderId(providerId);
+        member.setRoles(roles);
+
+        return member;
+    }
 }

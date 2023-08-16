@@ -26,16 +26,12 @@ public class ProductController {
         productService.createProduct(productDTO);
     }
 
-    @DeleteMapping
-
-    @PutMapping
-
-    @PatchMapping
-
     @GetMapping("/api3")
     public List<ProductDTO> getProduct() {
         return productService.getAllProducts();
     }
+
+
 
 //    private final ProductService productService;
 //
