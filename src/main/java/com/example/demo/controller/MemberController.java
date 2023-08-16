@@ -17,6 +17,7 @@ public class MemberController {
 
     private final MemberRepository memberRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final MemberService memberService;
 
     @GetMapping("home")
     public String home() {
@@ -34,5 +35,26 @@ public class MemberController {
         member.setRoles("USER");
         memberRepository.save(member);
         return "회원가입완료";
+
+
+    @PostMapping("/create_member")
+    public void createMember(@RequestBody Member member) {
+        memberRepository.save(member);
+    }
+
+    @PostMapping("/post_memberDTO")
+    public void createMemberDto(@RequestBody MemberDTO memberDTO) {
+        memberService.createMember(memberDTO);
+    }
+
+//    @DeleteMapping
+//
+//    @PutMapping
+//
+//    @PatchMapping
+
+    @GetMapping("/get_member")
+    public List<MemberDTO> getMembers() {
+        return memberService.getAllMembers();
     }
 }
