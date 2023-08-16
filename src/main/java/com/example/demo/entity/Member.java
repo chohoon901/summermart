@@ -35,7 +35,7 @@ public class Member {
     private String roles;
     private String providerId;
     private String provider;
-    private int point;
+//    private int point;
 
     public static Member createOauthMember(String username, String password, String provider, String providerId, String roles) {
         Member member = new Member();

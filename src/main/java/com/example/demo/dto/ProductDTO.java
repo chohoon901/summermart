@@ -25,6 +25,5 @@ public class ProductDTO {
         stock = product.getStock();
         price = product.getPrice();
         disc = product.getDisc();
-
     }
 }
