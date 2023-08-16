@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.MemberDTO;
 import com.example.demo.entity.Member;
 import com.example.demo.repository.MemberRepository;
+import com.example.demo.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,12 +37,8 @@ public class MemberController {
         member.setRoles("USER");
         memberRepository.save(member);
         return "회원가입완료";
-
-
-    @PostMapping("/create_member")
-    public void createMember(@RequestBody Member member) {
-        memberRepository.save(member);
     }
+
 
     @PostMapping("/post_memberDTO")
     public void createMemberDto(@RequestBody MemberDTO memberDTO) {
