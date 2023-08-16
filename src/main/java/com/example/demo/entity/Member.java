@@ -32,4 +32,5 @@ public class Member {
     private String name;
     private String phone;
     private String roles;
+    private int point;
 }

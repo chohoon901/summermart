@@ -26,7 +26,10 @@ public class ProductService {
 
         SubCategory subCategory = SubCategory.createSubCategory(mainCategory, productDTO.getSubName());
 
-        Product product = Product.createProduct(subCategory, productDTO.getStock(), productDTO.getName(), productDTO.getPrice(), productDTO.getPicture());
+        Product product = Product.createProduct(
+                subCategory, productDTO.getStock(), productDTO.getName(), productDTO.getPrice(), productDTO.getPicture(),
+                productDTO.getDisc(), productDTO.getPoint()
+                );
         productRepository.save(product);
     }
 
