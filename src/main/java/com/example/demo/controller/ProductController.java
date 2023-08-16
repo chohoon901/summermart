@@ -26,12 +26,6 @@ public class ProductController {
         productService.createProduct(productDTO);
     }
 
-//    @DeleteMapping
-//
-//    @PutMapping
-//
-//    @PatchMapping
-
     @GetMapping("/get_product")
     public List<ProductDTO> getProduct() {
         return productService.getAllProducts();
@@ -69,6 +63,4 @@ public class ProductController {
 //    public List<Product> getAllProduct() {
 //        return productService.getAllProducts();
 //    }
-
-
 }

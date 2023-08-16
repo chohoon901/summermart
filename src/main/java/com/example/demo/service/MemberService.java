@@ -19,8 +19,8 @@ public class MemberService {
     public void createMember(MemberDTO memberDTO) {
         Member member = new Member();
         member.setAddress(memberDTO.getAddress());
-        member.setMemberId(memberDTO.getMemberId());
-        member.setMemberPw(memberDTO.getMemberPw());
+        member.setUsername(memberDTO.getUsername());
+        member.setPassword(memberDTO.getPassword());
         member.setName(memberDTO.getName());
         member.setPhone(memberDTO.getPhone());
         member.setRoles(memberDTO.getRoles());

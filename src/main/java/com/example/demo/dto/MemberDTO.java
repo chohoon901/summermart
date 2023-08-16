@@ -3,14 +3,12 @@ package com.example.demo.dto;
 import com.example.demo.entity.Member;
 import lombok.Data;
 
-import java.util.List;
-
 @Data
 public class MemberDTO {
 
     private String address;
-    private String memberId;
-    private String memberPw;
+    private String username;
+    private String password;
     private String name;
     private String phone;
     private String roles;
@@ -22,8 +20,8 @@ public class MemberDTO {
 
     public MemberDTO(Member member) {
         address = member.getAddress();
-        memberId = member.getMemberId();
-        memberPw = member.getMemberPw();
+        username = member.getUsername();
+        password = member.getPassword();
         name = member.getName();
         phone = member.getPhone();
         roles = member.getRoles();
