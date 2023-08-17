@@ -35,6 +35,7 @@ public class Member {
     private String roles;
     private String providerId;
     private String provider;
+//    private int point;
 
     public List<String> getRoleList() {
         if(this.roles.length() > 0) {

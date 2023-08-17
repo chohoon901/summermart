@@ -10,24 +10,24 @@ import javax.persistence.Id;
 @Data
 public class Recommend {
     @Id
-    private int ID;
+    private int id;
 
-    private String SUBCAT;
+    private String subcat;
 
-    private String PROD;
+    private String prod;
 
-    private int BASEP;
+    private int basep;
 
-    private int DISC;
+    private int disc;
 
-    private int PRICV;
+    private int pricv;
 
-    private int REW;
+    private int rew;
 
-    private float RATE;
+    private float rate;
 
-    private int REC;
+    private int rec;
 
-    private String IMAGE;
+    private String image;
 
 }
