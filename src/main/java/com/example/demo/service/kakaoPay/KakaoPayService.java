@@ -16,8 +16,9 @@ import org.springframework.web.client.RestTemplate;
 @Transactional
 public class KakaoPayService {
     static final String cid = "TC0ONETIME"; // 가맹점 테스트 코드
-    static final String admin_Key = KakaoPayProperties.ADMIN_KEY; // 공개 조심! 본인 애플리케이션의 어드민 키를 넣어주세요
+    static final String admin_Key = KakaoPayProperties.ADMIN_KEY; // 공개 조심
     private KakaoResponseDTO kakaoReady;
+    private KakaoApproveResponse kakaoApprove;
 
     public KakaoResponseDTO kakaoPayReady() {
 
@@ -27,10 +28,9 @@ public class KakaoPayService {
         parameters.add("partner_order_id", "가맹점 주문 번호");
         parameters.add("partner_user_id", "가맹점 회원 ID");
         parameters.add("item_name", "상품명");
-        parameters.add("quantity", "주문 수량");
-        parameters.add("total_amount", "총 금액");
-        parameters.add("vat_amount", "부가세");
-        parameters.add("tax_free_amount", "상품 비과세 금액");
+        parameters.add("quantity", "5");
+        parameters.add("total_amount", "10000");
+        parameters.add("tax_free_amount", "0");
         parameters.add("approval_url", "http://localhost:8080/payment/success"); // 성공 시 redirect url
         parameters.add("cancel_url", "http://localhost:8080/payment/cancel"); // 취소 시 redirect url
         parameters.add("fail_url", "http://localhost:8080/payment/fail"); // 실패 시 redirect url
@@ -68,10 +68,12 @@ public class KakaoPayService {
         // 외부에 보낼 url
         RestTemplate restTemplate = new RestTemplate();
 
-        return restTemplate.postForObject(
+        kakaoApprove = restTemplate.postForObject(
                 "https://kapi.kakao.com/v1/payment/approve",
                 requestEntity,
                 KakaoApproveResponse.class);
+
+        return kakaoApprove;
     }
 
     /**

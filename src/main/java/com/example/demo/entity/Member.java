@@ -36,6 +36,13 @@ public class Member {
     private String providerId;
     private String provider;
 
+    public List<String> getRoleList() {
+        if(this.roles.length() > 0) {
+            return Arrays.asList(this.roles.split(","));
+        }
+        return new ArrayList<>();
+    }
+
     public static Member createOauthMember(String username, String password, String provider, String providerId, String roles) {
         Member member = new Member();
         member.setUsername(username);

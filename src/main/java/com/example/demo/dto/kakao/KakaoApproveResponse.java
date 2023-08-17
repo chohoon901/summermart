@@ -11,7 +11,7 @@ public class KakaoApproveResponse {
     private String aid; // 요청 고유 번호
     private String tid; // 결제 고유 번호
     private String cid; // 가맹점 코드
-    private String sid; // 정기결제용 ID
+//    private String sid; // 정기결제용 ID
     private String partner_order_id; // 가맹점 주문 번호
     private String partner_user_id; // 가맹점 회원 id
     private String payment_method_type; // 결제 수단
