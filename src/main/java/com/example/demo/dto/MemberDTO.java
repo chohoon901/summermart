@@ -17,7 +17,6 @@ public class MemberDTO {
         // 기본 생성자 추가
     }
 
-
     public MemberDTO(Member member) {
         address = member.getAddress();
         username = member.getUsername();
