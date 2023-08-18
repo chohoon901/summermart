@@ -1,44 +1,31 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.ProductListDTO;
+import com.example.demo.dto.ProductSearchCriteria;
 import com.example.demo.service.ProductListService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/product-list")
 public class ProductListController {
 
-    private final ProductListService productListService;
+    private final ProductListService productService;
 
     @Autowired
     public ProductListController(ProductListService productListService) {
-        this.productListService = productListService;
+        this.productService = productListService;
     }
 
-    @GetMapping
-    public List<ProductListDTO> getProductList() {
-        return productListService.getProductList();
-
-        //    @GetMapping("/display")
-//    public List<MainDisplayDTO> getTopProducts() {
-//        int numberOfProductsToDisplay = 10; // 표시할 상품 수
-//        return mainDisplayService.getTopProducts(numberOfProductsToDisplay);
-//    }
-
+    @PostMapping("/product_list")
+    public List<ProductListDTO> getProducts(@RequestBody ProductSearchCriteria criteria) {
+        return productService.getProductsByCriteria(
+                criteria.getMainName(),
+                criteria.getSubName(),
+                criteria.getMinPrice(),
+                criteria.getMaxPrice(),
+                PageRequest.of(criteria.getPage(), criteria.getSize()));
     }
 }
-
-
-
-
-
-
-
-
-
-
