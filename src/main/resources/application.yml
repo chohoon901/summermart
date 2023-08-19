@@ -23,3 +23,7 @@ decorator:
   datasource:
     p6spy:
       enable-logging: true
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm
+    time-zone: Asia/Seoul

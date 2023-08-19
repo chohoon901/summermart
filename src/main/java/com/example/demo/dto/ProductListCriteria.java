@@ -3,7 +3,7 @@ package com.example.demo.dto;
 import lombok.Data;
 
 @Data
-public class ProductSearchCriteria {
+public class ProductListCriteria {
     private String mainName;
     private String subName;
     private int minPrice;

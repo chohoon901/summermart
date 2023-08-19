@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.ProductListDTO;
-import com.example.demo.dto.ProductSearchCriteria;
+import com.example.demo.dto.ProductListCriteria;
 import com.example.demo.service.ProductListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -20,7 +20,7 @@ public class ProductListController {
     }
 
     @PostMapping("/product_list")
-    public List<ProductListDTO> getProducts(@RequestBody ProductSearchCriteria criteria) {
+    public List<ProductListDTO> getProducts(@RequestBody ProductListCriteria criteria) {
         return productService.getProductsByCriteria(
                 criteria.getMainName(),
                 criteria.getSubName(),
