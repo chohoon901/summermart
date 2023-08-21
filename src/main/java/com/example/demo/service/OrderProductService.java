@@ -18,7 +18,7 @@ public class OrderProductService {
 
     // 리스트일 경우 map을 통해 DTO를 Entity로 바꿈
     public List<OrderProductRequestDTO> getOrderProducts () {
-        return orderProductRepository.findAllByMember_Id(1L)
+        return orderProductRepository.findByMember_Id(1L)
                 .stream()
                 .map(OrderProductRequestDTO::new)
                 .collect(Collectors.toList());
