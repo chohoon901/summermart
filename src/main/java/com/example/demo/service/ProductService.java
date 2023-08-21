@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -29,6 +31,14 @@ public class ProductService {
                 productDTO.getDisc()
                 );
         productRepository.save(product);
+    }
+
+    public List<ProductDTO> getAllProducts() {
+        return productRepository.findAll()
+                .stream()
+                .map(p -> p != null ? new ProductDTO(p) : null)
+                .filter(obj -> Objects.nonNull(obj))
+                .collect(Collectors.toList());
     }
 
 

@@ -37,6 +37,7 @@ public class KakaoPayController {
 
         KakaoApproveResponse kakaoApprove = kakaoPayService.approveResponse(pgToken);
         // TODO : OrderItem 상품추가 메소드 부르기
+        System.out.println("total = " + kakaoApprove.getAmount().getTotal());
         return new ResponseEntity<>(kakaoApprove, HttpStatus.OK);
     }
 
