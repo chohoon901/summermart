@@ -4,25 +4,21 @@ import com.example.demo.entity.Member;
 import lombok.Data;
 
 @Data
-public class MemberDTO {
-
+public class GetMemberResponseDTO {
     private String address;
     private String username;
     private String password;
     private String name;
     private String phone;
-    private String roles;
 
-    public MemberDTO() {
-        // 기본 생성자 추가
-    }
 
-    public MemberDTO(Member member) {
+    // 다중 조회에서 사용하기 위해 작성
+    public GetMemberResponseDTO(Member member) {
         address = member.getAddress();
         username = member.getUsername();
         password = member.getPassword();
         name = member.getName();
         phone = member.getPhone();
-        roles = member.getRoles();
+
     }
 }
