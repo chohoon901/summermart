@@ -49,8 +49,4 @@ public class CommentService {
         return getCommentResponseDTO;
     }
 
-
-
-//    public void get
-
 }

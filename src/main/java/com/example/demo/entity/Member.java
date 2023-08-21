@@ -37,6 +37,13 @@ public class Member {
     private String provider;
 //    private int point;
 
+    public void addComment(Comment comment) {
+        this.comments.add(comment);
+        if(comment.getMember() != this) {
+            comment.setMember(this);
+        }
+    }
+
     public List<String> getRoleList() {
         if(this.roles.length() > 0) {
             return Arrays.asList(this.roles.split(","));
@@ -54,4 +61,5 @@ public class Member {
 
         return member;
     }
+
 }
