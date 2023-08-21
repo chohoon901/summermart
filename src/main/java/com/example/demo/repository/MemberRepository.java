@@ -11,4 +11,5 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     // 안에 있는 함수 예)save, findAll, findById... 자주 쓰임
     // 위의 3개 말고 (저장, 전체찾기, ID별 단일찾기(기본내장)) 다른 기능이 필요하면 질문
     Member findByUsername(String username);
+
 }

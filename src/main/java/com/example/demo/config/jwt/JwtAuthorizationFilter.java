@@ -56,8 +56,8 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 			// 아래와 같이 토큰을 만들어서 Authentication 객체를 강제로 만들고 그걸 세션에 저장
 			PrincipalDetails principalDetails = new PrincipalDetails(user);
 			Authentication authentication = new UsernamePasswordAuthenticationToken(principalDetails,
-			null,
-			principalDetails.getAuthorities());
+			null, principalDetails.getAuthorities());
+			System.out.println("authentication111 = " + authentication);
 
 			// 강제로 시큐리티의 세션에 접근하여 값 저장
 			SecurityContextHolder.getContext().setAuthentication(authentication);

@@ -16,7 +16,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberController {
 
-    // 연결
     private final MemberRepository memberRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final MemberService memberService;
@@ -58,7 +57,4 @@ public class MemberController {
     public GetMemberResponseDTO findMember() {
         return memberService.getMember();
     }
-
-
-
 }

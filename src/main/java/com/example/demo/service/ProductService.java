@@ -41,6 +41,14 @@ public class ProductService {
         productRepository.save(product);
     }
 
+    public List<ProductDTO> getAllProducts() {
+        return productRepository.findAll()
+                .stream()
+                .map(p -> p != null ? new ProductDTO(p) : null)
+                .filter(obj -> Objects.nonNull(obj))
+                .collect(Collectors.toList());
+    }
+
 
     // 모든 상품 정보 조회
     public List<Product> getAllProducts_old() {

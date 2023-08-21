@@ -4,20 +4,18 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import com.example.demo.entity.Member;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-public class PrincipalDetails implements UserDetails{
+@Getter
+public class PrincipalDetails extends Member implements UserDetails{
 
-	private Member member;
+	private final Member member;
 
     public PrincipalDetails(Member member){
         this.member = member;
     }
-
-    public Member getMember() {
-		return member;
-	}
 
     @Override
     public String getPassword() {
@@ -54,5 +52,8 @@ public class PrincipalDetails implements UserDetails{
 		Collection<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(()-> member.getRoles());
         return authorities;
+//        Collection<GrantedAuthority> authorities = new ArrayList<>();
+//        member.getRoleList().forEach(r -> authorities.add(() -> r));
+//        return authorities;
     }
 }
