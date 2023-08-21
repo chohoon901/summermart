@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.OrderProductRequestDTO;
+import com.example.demo.entity.Member;
 import com.example.demo.service.OrderProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -17,7 +18,7 @@ public class OrderProductController {
 
     // @AuthenticationPrincipal
     @GetMapping("/find_Orderproducts")
-    public List<OrderProductRequestDTO> findOps() {
-        return orderProductService.getOrderProducts();
+    public List<OrderProductRequestDTO> findOps(@AuthenticationPrincipal Member member) {
+        return orderProductService.getOrderProducts(member);
     }
 }

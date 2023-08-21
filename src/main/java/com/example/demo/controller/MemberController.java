@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import com.example.demo.dto.GetMemberResponseDTO;
 import com.example.demo.dto.MemberRequestDTO;
 import com.example.demo.config.auth.PrincipalDetails;
-import com.example.demo.dto.MemberDTO;
 import com.example.demo.entity.Member;
 import com.example.demo.repository.MemberRepository;
 import com.example.demo.service.MemberService;
@@ -57,11 +56,6 @@ public class MemberController {
     }
 
 
-    @PostMapping("/post_memberDTO")
-    public void createMemberDto(@RequestBody MemberDTO memberDTO) {
-        memberService.createMember(memberDTO);
-    }
-
 //    @DeleteMapping
 //
 //    @PutMapping
@@ -74,8 +68,4 @@ public class MemberController {
         return memberService.getMember();
     }
 
-    @GetMapping("/get_member")
-    public List<MemberDTO> getMembers() {
-        return memberService.getAllMembers();
-    }
 }

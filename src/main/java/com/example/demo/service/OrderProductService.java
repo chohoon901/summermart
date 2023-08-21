@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.dto.OrderProductRequestDTO;
 import com.example.demo.dto.kakao.KakaoApproveResponse;
+import com.example.demo.entity.Member;
 import com.example.demo.entity.OrderProduct;
 import com.example.demo.repository.OrderProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +18,8 @@ public class OrderProductService {
     private final OrderProductRepository orderProductRepository;
 
     // 리스트일 경우 map을 통해 DTO를 Entity로 바꿈
-    public List<OrderProductRequestDTO> getOrderProducts () {
-        return orderProductRepository.findAllByMember_Id(1L)
+    public List<OrderProductRequestDTO> getOrderProducts (Member member) {
+        return orderProductRepository.findByMemberUsername(member.getUsername())
                 .stream()
                 .map(OrderProductRequestDTO::new)
                 .collect(Collectors.toList());
