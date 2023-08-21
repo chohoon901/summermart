@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/final?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://localhost:3306/prod_db2?serverTimezone=Asia/Seoul
     username: root
-    password: 1234
+    password: final1234
 
 
   jpa:
@@ -23,3 +23,4 @@ decorator:
   datasource:
     p6spy:
       enable-logging: true
+

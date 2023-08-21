@@ -2,6 +2,7 @@ package com.example.demo.service.kakaoPay;
 
 import com.example.demo.dto.kakao.KakaoApproveResponse;
 import com.example.demo.dto.kakao.KakaoResponseDTO;
+import com.example.demo.dto.kakao.PostKakaoRequestDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -19,17 +20,16 @@ public class KakaoPayService {
     static final String admin_Key = KakaoPayProperties.ADMIN_KEY; // 공개 조심! 본인 애플리케이션의 어드민 키를 넣어주세요
     private KakaoResponseDTO kakaoReady;
 
-    public KakaoResponseDTO kakaoPayReady() {
+    public KakaoResponseDTO kakaoPayReady(PostKakaoRequestDTO postKakaoRequestDTO) {
 
         // 카카오페이 요청 양식
         MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
         parameters.add("cid", cid);
         parameters.add("partner_order_id", "가맹점 주문 번호");
         parameters.add("partner_user_id", "가맹점 회원 ID");
-        parameters.add("item_name", "상품명");
-        parameters.add("quantity", "주문 수량");
-        parameters.add("total_amount", "총 금액");
-        parameters.add("vat_amount", "부가세");
+        parameters.add("item_name", postKakaoRequestDTO.getItem_name());
+        parameters.add("quantity", String.valueOf(postKakaoRequestDTO.getQuantity()));
+        parameters.add("total_amount", String.valueOf(postKakaoRequestDTO.getTotal_amount()));
         parameters.add("tax_free_amount", "상품 비과세 금액");
         parameters.add("approval_url", "http://localhost:8080/payment/success"); // 성공 시 redirect url
         parameters.add("cancel_url", "http://localhost:8080/payment/cancel"); // 취소 시 redirect url

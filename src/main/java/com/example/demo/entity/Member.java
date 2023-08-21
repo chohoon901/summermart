@@ -13,7 +13,7 @@ public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @OneToMany(mappedBy = "member")
     private List<Orders> orders = new ArrayList<>();
@@ -35,6 +35,7 @@ public class Member {
     private String roles;
     private String providerId;
     private String provider;
+//    private int point;
 
     public static Member createOauthMember(String username, String password, String provider, String providerId, String roles) {
         Member member = new Member();

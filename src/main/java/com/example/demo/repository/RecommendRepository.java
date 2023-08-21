@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface RecommendRepository extends JpaRepository<Recommend, String> {
 
-    @Query(value = "SELECT * FROM prod_tbl2 WHERE PROD LIKE %:word% LIMIT 5", nativeQuery = true)
+    @Query(value = "SELECT * FROM prod_tbl2 WHERE prod LIKE %:word% LIMIT 5", nativeQuery = true)
     List<Recommend> findProd(@Param(value="word") String word);
 
 }

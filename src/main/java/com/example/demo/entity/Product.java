@@ -16,7 +16,7 @@ public class Product {
     private Long Id;
 
     @OneToMany(mappedBy = "product")
-    private List<OrderProduct> orderProducts = new ArrayList<>();
+        private List<OrderProduct> orderProducts = new ArrayList<>();
 
     @OneToMany(mappedBy = "product")
     private List<Cart> carts = new ArrayList<>();
@@ -35,6 +35,8 @@ public class Product {
     private String name;
     private int price;
     private String picture;
+    private double disc;
+
 
     public void setSubCategory(SubCategory subCategory){
         if(this.subCategory!=null) {
@@ -56,13 +58,14 @@ public class Product {
         this.stock = restStock;
     }
 
-    public static Product createProduct(SubCategory subCategory, int stock, String name, int price, String picture) {
+    public static Product createProduct(SubCategory subCategory, int stock, String name, int price, String picture, double disc) {
         Product product = new Product();
         product.setSubCategory(subCategory);
         product.setStock(stock);
         product.setName(name);
         product.setPrice(price);
         product.setPicture(picture);
+        product.setDisc(disc); // 할인률
 
         return product;
     }

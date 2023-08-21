@@ -11,6 +11,8 @@ public class ProductDTO {
     private String picture;
     private String subName;
     private String mainName;
+    private double disc;
+
 
     public ProductDTO() {
     }
@@ -22,5 +24,6 @@ public class ProductDTO {
         name = product.getName();
         stock = product.getStock();
         price = product.getPrice();
+        disc = product.getDisc();
     }
 }
