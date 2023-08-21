@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.GetMemberResponseDTO;
+import com.example.demo.dto.MemberRequestDTO;
 import com.example.demo.config.auth.PrincipalDetails;
 import com.example.demo.dto.MemberDTO;
 import com.example.demo.entity.Member;
@@ -35,11 +37,17 @@ public class MemberController {
     @PostMapping("join")
     public String join(@RequestBody Member member) {
         member.setPassword(bCryptPasswordEncoder.encode(member.getPassword()));
-        member.setRoles("ROLE_USER");
+        member.setRoles("USER");
         memberRepository.save(member);
         return "회원가입완료";
     }
 
+    // 리엑트에서 요청한 JSON이 RequestBody
+    // get 요청도 마찬가지
+    @PostMapping("/create_member")
+    public void createMember(@RequestBody MemberRequestDTO memberRequestDTO) {
+        memberService.createMember(memberRequestDTO);
+    }
     @GetMapping("/test")
     public String testPrincipal(Authentication authentication) {
 //        System.out.println("Authentication = " + SecurityContextHolder.getContext().getAuthentication().toString());
@@ -59,6 +67,12 @@ public class MemberController {
 //    @PutMapping
 //
 //    @PatchMapping
+
+    // Member 보안문제로 id 값이 정해져 있음 (다른 사람 정보를 못가져옴)
+    @GetMapping("/select_member")
+    public GetMemberResponseDTO findMember() {
+        return memberService.getMember();
+    }
 
     @GetMapping("/get_member")
     public List<MemberDTO> getMembers() {

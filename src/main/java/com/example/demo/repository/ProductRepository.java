@@ -13,4 +13,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     // name을 포함하는 단어를 전부 찾아서 반환
     List<Product> findByNameContaining(String name);
+
+    Product findByName(String name);
 }
