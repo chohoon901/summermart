@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.CartRequestDTO;
+import com.example.demo.dto.CartUpdateDTO;
 import com.example.demo.dto.GetCartResponseDTO;
 import com.example.demo.dto.GetMyLikeResponseDTO;
 import com.example.demo.entity.Cart;
@@ -43,5 +44,31 @@ public class CartService {
     public void deleteCart(Long cartid) {
 
         cartRepository.deleteById(cartid);
+    }
+
+    public void UpdateCart(CartUpdateDTO cartUpdateDTO){
+        Cart cart = cartRepository.findById(cartUpdateDTO.getId())
+                .orElseThrow(()->new IllegalArgumentException("해당 회원이 없습니다. id=" + cartUpdateDTO.getId()));
+
+//        Cart cart = cartRepository.findById(1L)
+//                .orElseThrow(()->new IllegalArgumentException("해당 회원이 없습니다. id=" + 1L));
+
+//        int countToUpdate = cartUpdateDTO.getCount();
+//        if (countToUpdate != 0) {
+//            cart.setCount(countToUpdate);
+//        }
+
+        if (cartUpdateDTO.getUpdown() == 1) {
+            cart.addCount();
+        } else {
+            cart.deleteCount();
+        }
+//        } else if (cartUpdateDTO.getUpdown() == -1) {
+//            cart.deleteCount();
+//        } else {
+//            exception
+//        }
+
+        cartRepository.save(cart);
     }
 }

@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.CartRequestDTO;
+import com.example.demo.dto.CartUpdateDTO;
 import com.example.demo.dto.GetCartResponseDTO;
+import com.example.demo.entity.Cart;
 import com.example.demo.service.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -28,5 +30,10 @@ public class CartController {
     @DeleteMapping("/delete_cart/{cartid}")
     public void deleteCart(@PathVariable Long cartid) {
         cartService.deleteCart(cartid);
+    }
+
+    @PatchMapping("/update_cart")
+    public void update (@RequestBody CartUpdateDTO cartUpdateDTO) {
+        cartService.UpdateCart(cartUpdateDTO);
     }
 }

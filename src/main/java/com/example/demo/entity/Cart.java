@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 
@@ -21,6 +22,14 @@ public class Cart {
     private Product product;
 
     private int count;
+
+    public void addCount() {
+        this.count++;
+    }
+
+    public void deleteCount() {
+        this.count--;
+    }
 
     public void setMember(Member member){
         if(this.member!=null) {
