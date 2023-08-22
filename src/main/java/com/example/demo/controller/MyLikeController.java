@@ -27,4 +27,10 @@ public class MyLikeController {
     public List<GetMyLikeResponseDTO> getAllLikes() {
         return myLikeService.getAllLikes();
     }
+
+    @DeleteMapping("/delete_mylike/{mylikeid}")
+    public void deleteMyLike(@PathVariable Long mylikeid) {
+        myLikeService.deleteMyLike(mylikeid);
+    }
+
 }

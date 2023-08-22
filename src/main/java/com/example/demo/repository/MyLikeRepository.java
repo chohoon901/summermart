@@ -8,4 +8,6 @@ import java.util.List;
 public interface MyLikeRepository extends JpaRepository <MyLike, Long> {
 //    Integer findById(int id);
     List<MyLike> findAllByMember_Id(Long memberId);
+
+    void deleteById(Long id);
 }

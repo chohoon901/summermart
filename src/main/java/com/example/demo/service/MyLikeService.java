@@ -36,4 +36,9 @@ public class MyLikeService {
                 .collect(Collectors.toList());
     }
 
+    public void deleteMyLike(Long myLikeid) {
+
+        myLikeRepository.deleteById(myLikeid);
+    }
+
 }

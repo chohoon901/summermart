@@ -38,4 +38,10 @@ public class CartService {
                 .map(GetCartResponseDTO::new)
                 .collect(Collectors.toList());
     }
+
+    // Service
+    public void deleteCart(Long cartid) {
+
+        cartRepository.deleteById(cartid);
+    }
 }
