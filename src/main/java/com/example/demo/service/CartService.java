@@ -2,9 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.dto.CartRequestDTO;
 import com.example.demo.dto.GetCartResponseDTO;
-import com.example.demo.dto.GetMyLikeResponseDTO;
 import com.example.demo.entity.Cart;
-import com.example.demo.entity.MyLike;
 import com.example.demo.repository.CartRepository;
 import com.example.demo.repository.MemberRepository;
 import com.example.demo.repository.ProductRepository;
@@ -37,5 +35,9 @@ public class CartService {
                 .stream()
                 .map(GetCartResponseDTO::new)
                 .collect(Collectors.toList());
+    }
+
+    public void deleteCart(Long cartid) {
+        cartRepository.deleteById(cartid);
     }
 }

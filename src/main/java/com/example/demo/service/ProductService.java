@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.GetProductResponseDTO;
 import com.example.demo.dto.ProductDTO;
 import com.example.demo.entity.MainCategory;
 import com.example.demo.entity.Product;
@@ -19,12 +20,19 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
+
+    // TODO : getProduct
     public List<ProductDTO> getAllProducts() {
         return productRepository.findAll()
                 .stream()
                 .map(p -> p != null ? new ProductDTO(p) : null)
-                .filter(obj -> Objects.nonNull(obj))
+                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
+    }
+
+    public GetProductResponseDTO getShowProduct(Long id){
+        Product product = productRepository.findById(id).orElseThrow(()->new IllegalArgumentException("해당 상품이 없습니다. id="+id));
+        return new GetProductResponseDTO(product);
     }
 
     // 상품 정보 생성
@@ -40,11 +48,4 @@ public class ProductService {
                 );
         productRepository.save(product);
     }
-
-
-    // 모든 상품 정보 조회
-    public List<Product> getAllProducts_old() {
-        return productRepository.findAll();
-    }
-
 }

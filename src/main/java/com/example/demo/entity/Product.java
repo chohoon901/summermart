@@ -36,6 +36,7 @@ public class Product {
     private int price;
     private String picture;
     private double disc;
+    private int commentCount;
 
 
     public void setSubCategory(SubCategory subCategory){
@@ -56,6 +57,10 @@ public class Product {
             throw new NotEnoughStockException("재고 부족");
         }
         this.stock = restStock;
+    }
+
+    public void addComment() {
+        this.commentCount++;
     }
 
     public static Product createProduct(SubCategory subCategory, int stock, String name, int price, String picture, double disc) {

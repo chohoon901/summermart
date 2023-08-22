@@ -1,9 +1,12 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/prod_db2?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://localhost:3306/final?serverTimezone=Asia/Seoul
     username: root
-    password: final1234
+    password: 1234
+  #    url: jdbc:mysql://playdata.cqro5qdbxzm7.ap-northeast-2.rds.amazonaws.com:3306/summermart?serverTimezone=Asia/Seoul
+  #    username: admin
+  #    password: "qwer1234!"
 
 
   jpa:

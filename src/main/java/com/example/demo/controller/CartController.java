@@ -23,4 +23,9 @@ public class CartController {
     public List<GetCartResponseDTO> getAllCarts() {
         return cartService.getAllCarts();
     }
+
+    @DeleteMapping("/delete_cart/{cartid}")
+    public void deleteCart(@PathVariable Long cartid) {
+        cartService.deleteCart(cartid);
+    }
 }

@@ -22,7 +22,6 @@ public class Comment {
     private Product product;
 
     private String body;
-    private LocalDateTime date;
 
     public void setMember(Member member){
         if(this.member!=null) {
@@ -40,11 +39,10 @@ public class Comment {
         product.getComments().add(this);
     }
 
-    public static Comment createComment(Product product, String body, LocalDateTime date) {
+    public static Comment createComment(Product product, String body) {
         Comment comment = new Comment();
         comment.setProduct(product);
         comment.setBody(body);
-        comment.setDate(date);
 
         return comment;
     }

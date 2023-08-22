@@ -1,21 +1,19 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.GetMemberResponseDTO;
-import com.example.demo.dto.MemberRequestDTO;
 import com.example.demo.config.auth.PrincipalDetails;
 import com.example.demo.entity.Member;
 import com.example.demo.repository.MemberRepository;
 import com.example.demo.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/member")
+//@RequestMapping("/member")
 @RequiredArgsConstructor
 public class MemberController {
 
@@ -41,12 +39,7 @@ public class MemberController {
         return "회원가입완료";
     }
 
-    // 리엑트에서 요청한 JSON이 RequestBody
-    // get 요청도 마찬가지
-    @PostMapping("/create_member")
-    public void createMember(@RequestBody MemberRequestDTO memberRequestDTO) {
-        memberService.createMember(memberRequestDTO);
-    }
+
     @GetMapping("/test")
     public String testPrincipal(Authentication authentication) {
 //        System.out.println("Authentication = " + SecurityContextHolder.getContext().getAuthentication().toString());
