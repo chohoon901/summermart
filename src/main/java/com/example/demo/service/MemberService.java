@@ -2,13 +2,13 @@ package com.example.demo.service;
 
 import com.example.demo.dto.GetMemberResponseDTO;
 import com.example.demo.dto.MemberRequestDTO;
+import com.example.demo.dto.MemberUpdateRequestDTO;
 import com.example.demo.entity.Member;
 import com.example.demo.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 // 컨트롤러 -> 서비스 -> 레퍼지토리 -> 엔티티(DB)
@@ -71,7 +71,7 @@ public class MemberService {
     // 그릇을 옮기는 작업과 그릇을 만드는 작업을 한줄에서 다함
     // Member에서는 보안문제 때문에 매개변수 작성 금지 (다른 사람 정보 가져오기 금지)
     public GetMemberResponseDTO getMember() {
-        Member member = memberRepository.findById(1L).orElseThrow(()->new IllegalArgumentException("해당 회원이 없습니다. id="+1L));
+        Member member = memberRepository.findById(3L).orElseThrow(()->new IllegalArgumentException("해당 회원이 없습니다. id="+1L));
 
         return new GetMemberResponseDTO(member);
     }
@@ -84,6 +84,35 @@ public class MemberService {
 //        return new GetMemberResponseDTO(member);
 //    }
 
+    public Member updateMember(MemberUpdateRequestDTO memberUpdateRequestDTO) {
+//        Member member = memberRepository.findById(memberUpdateRequestDTO.getId())
+        Member member = memberRepository.findById(3L)
+                .orElseThrow(()->new IllegalArgumentException("해당 회원이 없습니다. id="+3L));
 
+        if(memberUpdateRequestDTO.getAddress()!=null){
+            member.setAddress(memberUpdateRequestDTO.getAddress());
+        }
+        if(memberUpdateRequestDTO.getUsername()!=null){
+            member.setUsername(memberUpdateRequestDTO.getUsername());
+        }
+        if(memberUpdateRequestDTO.getPassword()!=null){
+            member.setPassword(memberUpdateRequestDTO.getPassword());
+        }
+        if(memberUpdateRequestDTO.getName()!=null){
+            member.setName(memberUpdateRequestDTO.getName());
+        }
+        if(memberUpdateRequestDTO.getUsername()!=null){
+            member.setPhone(memberUpdateRequestDTO.getPhone());
+        }
+
+//        member.update(memberUpdateRequestDTO.getAddress(),
+//                      memberUpdateRequestDTO.getUsername(),
+//                      memberUpdateRequestDTO.getPassword(),
+//                      memberUpdateRequestDTO.getName(),
+//                      memberUpdateRequestDTO.getPhone());
+
+        memberRepository.save(member);
+        return member;
+    }
 
 }

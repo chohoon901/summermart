@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.GetMemberResponseDTO;
 import com.example.demo.dto.MemberRequestDTO;
+import com.example.demo.dto.MemberUpdateRequestDTO;
 import com.example.demo.entity.Member;
 import com.example.demo.repository.MemberRepository;
 import com.example.demo.service.MemberService;
@@ -40,13 +41,13 @@ public class MemberController {
 
     // 리엑트에서 요청한 JSON이 RequestBody
     // get 요청도 마찬가지
-//    @PostMapping("/create_member")
-//    public void createMember(@RequestBody MemberRequestDTO memberRequestDTO) {
-//        memberService.createMember(memberRequestDTO);
-//    }
+    @PostMapping("/create_member")
+    public void createMember(@RequestBody MemberRequestDTO memberRequestDTO) {
+        memberService.createMember(memberRequestDTO);
+    }
 
-    // RequestParam 사용 금지 하위호한
-    // Product Path Variable 사용, 주소의 id가 들어있을 때
+//    RequestParam 사용금지 하위호한
+//    Product Path Variable 사용, 주소의 id가 들어있을 때
 //    @GetMapping("/select_member/{id}")
 //    public GetMemberResponseDTO findMember(@PathVariable Long id) {
 //        return memberService.getMember(id);
@@ -57,4 +58,13 @@ public class MemberController {
     public GetMemberResponseDTO findMember() {
         return memberService.getMember();
     }
+
+
+    @PatchMapping("/update_member")
+    public Member updateMember(@RequestBody MemberUpdateRequestDTO memberUpdateRequestDTO) {
+//        System.out.println("memberUpdateRequestDTO = " + memberUpdateRequestDTO);
+//        return null;
+        return memberService.updateMember(memberUpdateRequestDTO);
+    }
+
 }
