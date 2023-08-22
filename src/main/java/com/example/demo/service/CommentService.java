@@ -29,6 +29,7 @@ public class CommentService {
         Comment comment = commentRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 유저 없음"));
         comment.setMember(memberRepository.findByUsername(member.getUsername()));
 //        System.out.println("getUsername = " + member.getUsername());
+        comment.getProduct().addComment();
         comment.setProduct(productRepository.findById(productId).orElseThrow());
     }
 

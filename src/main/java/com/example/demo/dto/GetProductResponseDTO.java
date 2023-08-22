@@ -4,7 +4,7 @@ import com.example.demo.entity.Product;
 import lombok.Data;
 
 @Data
-public class ProductDTO {
+public class GetProductResponseDTO {
     private String name;
     private int stock;
     private int price;
@@ -15,10 +15,8 @@ public class ProductDTO {
     private int commentCount;
 
 
-    public ProductDTO() {
-    }
+    public GetProductResponseDTO(Product product) {
 
-    public ProductDTO(Product product) {
         mainName = product.getSubCategory().getMainCategory().getMainName();
         subName = product.getSubCategory().getSubName();
         picture = product.getPicture();

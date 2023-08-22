@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.GetProductResponseDTO;
 import com.example.demo.dto.ProductDTO;
 import com.example.demo.entity.MainCategory;
 import com.example.demo.entity.Product;
@@ -42,10 +43,15 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
+    // 단건 조회
 
-    // 모든 상품 정보 조회
-    public List<Product> getAllProducts_old() {
-        return productRepository.findAll();
+    public GetProductResponseDTO getShowProduct(Long id){
+
+        Product product = productRepository.findById(id).orElseThrow(()->new IllegalArgumentException("해당 상품이 없습니다. id="+id));
+
+        return new GetProductResponseDTO(product);
     }
+
+
 
 }

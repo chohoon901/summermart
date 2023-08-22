@@ -11,15 +11,17 @@ import org.apache.hc.client5.http.entity.*;
 import org.apache.hc.client5.http.impl.classic.*;
 import org.apache.hc.core5.http.io.entity.*;
 import org.apache.hc.core5.http.message.*;
+import org.springframework.web.bind.annotation.RestController;
+
 import java.nio.charset.Charset;
 
-@Controller
+@RestController
 public class RecommendController {
 
     @Autowired
     private RecommendRepository repository;
 
-    @RequestMapping("/search")
+    @RequestMapping("/recommend")
     
     @ResponseBody
     public String selectedProd(String word) throws Exception {

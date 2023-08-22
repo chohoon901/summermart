@@ -24,9 +24,9 @@ public class KakaoPayController {
      * 결제요청
      */
     @PostMapping("/ready")
-    public KakaoResponseDTO readyToKakaoPay() {
+    public KakaoResponseDTO readyToKakaoPay(@RequestBody PostKakaoRequestDTO postKakaoRequestDTO) {
 
-        return kakaoPayService.kakaoPayReady(new PostKakaoRequestDTO());
+        return kakaoPayService.kakaoPayReady(postKakaoRequestDTO);
     }
 
     @GetMapping("/success")

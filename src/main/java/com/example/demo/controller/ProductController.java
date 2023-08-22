@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.GetProductResponseDTO;
 import com.example.demo.dto.ProductDTO;
 import com.example.demo.entity.Product;
 import com.example.demo.repository.ProductRepository;
@@ -13,22 +14,21 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductController {
 
-    private final ProductRepository productRepository;
     private final ProductService productService;
 
     @PostMapping("/create_product")
-    public void createProduct(@RequestBody Product product) {
-        productRepository.save(product);
-    }
-
-    @PostMapping("/post_productDTO")
     public void createProductDto(@RequestBody ProductDTO productDTO) {
         productService.createProduct(productDTO);
     }
 
-    @GetMapping("/get_product")
+    @GetMapping("/get_products")
     public List<ProductDTO> getProduct() {
         return productService.getAllProducts();
+    }
+
+    @GetMapping("/get_product/{id}")
+    public GetProductResponseDTO getShowProduct(@PathVariable Long id) {
+        return productService.getShowProduct(id);
     }
 
 //    private final ProductService productService;
