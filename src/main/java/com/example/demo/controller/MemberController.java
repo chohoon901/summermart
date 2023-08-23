@@ -82,6 +82,4 @@ public class MemberController {
 //        return memberService.getMember(id);
 //    }
 
-
-
 }
