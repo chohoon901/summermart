@@ -43,6 +43,7 @@ public class CommentService {
 
     private GetCommentResponseDTO entityToDto(Comment comment) {
         GetCommentResponseDTO getCommentResponseDTO = new GetCommentResponseDTO();
+        getCommentResponseDTO.setId(comment.getId());
         getCommentResponseDTO.setBody(comment.getBody());
         //getCommentResponseDTO.setMemberName(member.getName());
         getCommentResponseDTO.setMemberName(comment.getMember().getName());

@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.GetComparePasswordDTO;
 import com.example.demo.dto.GetMemberResponseDTO;
 import com.example.demo.dto.MemberRequestDTO;
 import com.example.demo.entity.Member;
@@ -70,10 +71,19 @@ public class MemberService {
     // 단건 조회
     // 그릇을 옮기는 작업과 그릇을 만드는 작업을 한줄에서 다함
     // Member에서는 보안문제 때문에 매개변수 작성 금지 (다른 사람 정보 가져오기 금지)
-    public GetMemberResponseDTO getMember() {
-        Member member = memberRepository.findById(1L).orElseThrow(()->new IllegalArgumentException("해당 회원이 없습니다. id="+1L));
+    public GetMemberResponseDTO getMember(Member member) {
+        Member member1 = memberRepository.findByUsername(member.getUsername());
+        return new GetMemberResponseDTO(member1);
+    }
 
-        return new GetMemberResponseDTO(member);
+    public Boolean comparePassword(Member member, GetComparePasswordDTO getComparePasswordDTO) {
+        boolean isCorrect = false;
+
+        if(member.getPassword().equals(getComparePasswordDTO.getPassword())) {
+            isCorrect = true;
+        }
+
+        return isCorrect;
     }
 
 

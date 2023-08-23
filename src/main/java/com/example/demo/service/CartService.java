@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.dto.CartRequestDTO;
 import com.example.demo.dto.GetCartResponseDTO;
 import com.example.demo.entity.Cart;
+import com.example.demo.entity.Member;
 import com.example.demo.repository.CartRepository;
 import com.example.demo.repository.MemberRepository;
 import com.example.demo.repository.ProductRepository;
@@ -30,8 +31,8 @@ public class CartService {
 
     }
 
-    public List<GetCartResponseDTO> getAllCarts() {
-        return cartRepository.findAllByMember_Id(1L)
+    public List<GetCartResponseDTO> getAllCarts(Member member) {
+        return cartRepository.findByMemberUsername(member.getUsername())
                 .stream()
                 .map(GetCartResponseDTO::new)
                 .collect(Collectors.toList());

@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.GetComparePasswordDTO;
 import com.example.demo.dto.GetMemberResponseDTO;
 import com.example.demo.config.auth.PrincipalDetails;
 import com.example.demo.entity.Member;
@@ -7,6 +8,7 @@ import com.example.demo.repository.MemberRepository;
 import com.example.demo.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,6 +50,23 @@ public class MemberController {
         return principalDetails.getUsername();
     }
 
+    // 어디쓸지 잘 모름
+    @GetMapping("/select_member")
+    public GetMemberResponseDTO findMember(@AuthenticationPrincipal Member member) {
+        return memberService.getMember(member);
+    }
+
+    @GetMapping("/select_AllMembers")
+    public List<GetMemberResponseDTO> findMembers() {
+        return memberService.getAllMembers();
+    }
+
+    @GetMapping("/compare_password")
+    public Boolean findMember(@AuthenticationPrincipal Member member,
+                              @RequestBody GetComparePasswordDTO getComparePasswordDTO) {
+        return memberService.comparePassword(member, getComparePasswordDTO);
+    }
+
 
 //    @DeleteMapping
 //
@@ -56,9 +75,6 @@ public class MemberController {
 //    @PatchMapping
 
     // Member 보안문제로 id 값이 정해져 있음 (다른 사람 정보를 못가져옴)
-    @GetMapping("/select_member")
-    public GetMemberResponseDTO findMember() {
-        return memberService.getMember();
-    }
+
 
 }

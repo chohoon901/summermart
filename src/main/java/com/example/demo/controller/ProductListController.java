@@ -26,6 +26,7 @@ public class ProductListController {
                 criteria.getSubName(),
                 criteria.getMinPrice(),
                 criteria.getMaxPrice(),
-                PageRequest.of(criteria.getPage(), criteria.getSize()));
+                PageRequest.of(criteria.getPage(), criteria.getSize())
+        );
     }
 }
