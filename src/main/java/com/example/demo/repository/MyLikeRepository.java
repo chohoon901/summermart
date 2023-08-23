@@ -10,4 +10,5 @@ public interface MyLikeRepository extends JpaRepository <MyLike, Long> {
     List<MyLike> findAllByMember_Id(Long memberId);
 
     void deleteById(Long id);
+
 }

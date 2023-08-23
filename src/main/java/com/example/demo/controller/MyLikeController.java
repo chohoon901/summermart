@@ -22,6 +22,14 @@ public class MyLikeController {
         myLikeService.createMyLike(productId);
     }
 
+    @PostMapping("/post_mylike_to_cart/{mylikeid}")
+    public void postCart(@PathVariable Long mylikeid) {
+//        System.out.println("myliek id =" + mylikeid);
+        myLikeService.postCart(mylikeid);
+//        return "cart add ok!!";
+    }
+
+
     // @AuthenticationPrincipal
     @GetMapping("/select_mylike")
     public List<GetMyLikeResponseDTO> getAllLikes() {
@@ -32,5 +40,11 @@ public class MyLikeController {
     public void deleteMyLike(@PathVariable Long mylikeid) {
         myLikeService.deleteMyLike(mylikeid);
     }
+
+    // detail에서 mylike delete
+//    @DeleteMapping("/delete_mylike")
+//    public void deleteMyLike(@RequestBody DTO DTO) {
+//        myLikeService.deleteMyLike(DTO);
+//    }
 
 }

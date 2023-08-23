@@ -1,24 +1,27 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.CartRequestDTO;
-import com.example.demo.dto.CartUpdateDTO;
-import com.example.demo.dto.GetCartResponseDTO;
-import com.example.demo.dto.GetMyLikeResponseDTO;
+import com.example.demo.dto.*;
 import com.example.demo.entity.Cart;
+import com.example.demo.entity.Member;
 import com.example.demo.entity.MyLike;
+import com.example.demo.entity.Product;
 import com.example.demo.repository.CartRepository;
 import com.example.demo.repository.MemberRepository;
+import com.example.demo.repository.MyLikeRepository;
 import com.example.demo.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class CartService {
 
+    private final MyLikeRepository myLikeRepository;
     private final ProductRepository productRepository;
     private final MemberRepository memberRepository;
     private final CartRepository cartRepository;
