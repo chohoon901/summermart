@@ -29,6 +29,7 @@ public class CommentService {
         Comment comment = commentRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 유저 없음"));
         comment.setMember(memberRepository.findByUsername(member.getUsername()));
 //        System.out.println("getUsername = " + member.getUsername());
+        comment.setProduct(productRepository.findById(productId).orElseThrow());
         comment.getProduct().addComment();
         comment.setProduct(productRepository.findById(productId).orElseThrow());
     }
@@ -42,6 +43,7 @@ public class CommentService {
 
     private GetCommentResponseDTO entityToDto(Comment comment) {
         GetCommentResponseDTO getCommentResponseDTO = new GetCommentResponseDTO();
+        getCommentResponseDTO.setId(comment.getId());
         getCommentResponseDTO.setBody(comment.getBody());
         //getCommentResponseDTO.setMemberName(member.getName());
         getCommentResponseDTO.setMemberName(comment.getMember().getName());
