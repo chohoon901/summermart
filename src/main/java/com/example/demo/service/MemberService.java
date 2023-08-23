@@ -84,10 +84,11 @@ public class MemberService {
 //        return new GetMemberResponseDTO(member);
 //    }
 
-    public Member updateMember(MemberUpdateRequestDTO memberUpdateRequestDTO) {
-//        Member member = memberRepository.findById(memberUpdateRequestDTO.getId())
-        Member member = memberRepository.findById(3L)
-                .orElseThrow(()->new IllegalArgumentException("해당 회원이 없습니다. id="+3L));
+    public void updateMember(MemberUpdateRequestDTO memberUpdateRequestDTO) {
+        Member member = memberRepository.findById(memberUpdateRequestDTO.getId())
+                .orElseThrow(()->new IllegalArgumentException("해당 회원이 없습니다. id="+memberUpdateRequestDTO.getId()));
+//        Member member = memberRepository.findById(3L)
+//                .orElseThrow(()->new IllegalArgumentException("해당 회원이 없습니다. id="+3L));
 
         if(memberUpdateRequestDTO.getAddress()!=null){
             member.setAddress(memberUpdateRequestDTO.getAddress());
@@ -112,7 +113,6 @@ public class MemberService {
 //                      memberUpdateRequestDTO.getPhone());
 
         memberRepository.save(member);
-        return member;
     }
 
 }

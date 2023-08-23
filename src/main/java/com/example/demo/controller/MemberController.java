@@ -61,10 +61,10 @@ public class MemberController {
 
 
     @PatchMapping("/update_member")
-    public Member updateMember(@RequestBody MemberUpdateRequestDTO memberUpdateRequestDTO) {
+    public void updateMember(@RequestBody MemberUpdateRequestDTO memberUpdateRequestDTO) {
 //        System.out.println("memberUpdateRequestDTO = " + memberUpdateRequestDTO);
 //        return null;
-        return memberService.updateMember(memberUpdateRequestDTO);
+        memberService.updateMember(memberUpdateRequestDTO);
     }
 
 }
