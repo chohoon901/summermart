@@ -44,8 +44,8 @@ public class CartService {
     }
 
     // Service
-    public void deleteCart(Long cartid) {
-
+    public void deleteCart(CartDeleteRequestDTO cartDeleteRequestDTO) {
+        Long cartid = cartDeleteRequestDTO.getId();
         cartRepository.deleteById(cartid);
     }
 

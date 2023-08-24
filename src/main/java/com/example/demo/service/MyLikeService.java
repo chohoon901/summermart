@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.GetMyLikeResponseDTO;
+import com.example.demo.dto.MyLikeDeleteRequestDTO;
 import com.example.demo.entity.Cart;
 import com.example.demo.entity.Member;
 import com.example.demo.entity.MyLike;
@@ -55,9 +56,18 @@ public class MyLikeService {
                 .collect(Collectors.toList());
     }
 
-    public void deleteMyLike(Long myLikeid) {
-
+    public void deleteMyLike(MyLikeDeleteRequestDTO myLikeDeleteRequestDTO) {
+        Long myLikeid = myLikeDeleteRequestDTO.getId();
         myLikeRepository.deleteById(myLikeid);
     }
+
+//    public void deleteMyLikeByMemberIdAndProductId(MyLikeDeleteRequestDTO myLikeDeleteRequestDTO) {
+//        Long myLikeId = myLikeRepository.findMyLikeIdByMemberIdAndProductId(
+//                myLikeDeleteRequestDTO.getMemberId(),
+//                myLikeDeleteRequestDTO.getProductId());
+//
+//        myLikeRepository.deleteById(myLikeId);
+//    }
+
 
 }

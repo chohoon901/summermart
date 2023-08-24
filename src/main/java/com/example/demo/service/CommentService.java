@@ -1,9 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.CommentUpdateRequestDTO;
-import com.example.demo.dto.CreateCommentRequestDTO;
-import com.example.demo.dto.GetCommentResponseDTO;
-import com.example.demo.dto.MemberUpdateRequestDTO;
+import com.example.demo.dto.*;
 import com.example.demo.entity.Comment;
 import com.example.demo.entity.Member;
 import com.example.demo.repository.CommentRepository;
@@ -52,8 +49,8 @@ public class CommentService {
         return getCommentResponseDTO;
     }
 
-    public void deleteComment(Long commentid) {
-
+    public void deleteComment(CommentDeleteRequestDTO commentDeleteRequestDTO) {
+        Long commentid = commentDeleteRequestDTO.getId();
         commentRepository.deleteById(commentid);
     }
 

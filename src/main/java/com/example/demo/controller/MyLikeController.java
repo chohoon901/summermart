@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.GetMyLikeResponseDTO;
+import com.example.demo.dto.MyLikeDeleteRequestDTO;
+import com.example.demo.entity.Member;
 import com.example.demo.entity.MyLike;
 import com.example.demo.service.MyLikeService;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +19,7 @@ public class MyLikeController {
 
     // @AuthenticationPrincipal
     // @RequestHeader 제거
+    // 세션 = DB
     @PostMapping("/create_mylike/{productId}")
     public void createMyLike(@PathVariable Long productId) {
         myLikeService.createMyLike(productId);
@@ -29,22 +32,22 @@ public class MyLikeController {
 //        return "cart add ok!!";
     }
 
-
     // @AuthenticationPrincipal
     @GetMapping("/select_mylike")
     public List<GetMyLikeResponseDTO> getAllLikes() {
         return myLikeService.getAllLikes();
     }
 
-    @DeleteMapping("/delete_mylike/{mylikeid}")
-    public void deleteMyLike(@PathVariable Long mylikeid) {
-        myLikeService.deleteMyLike(mylikeid);
+    @DeleteMapping("/delete_mylike")
+    public void deleteMyLike(@RequestBody MyLikeDeleteRequestDTO myLikeDeleteRequestDTO) {
+        myLikeService.deleteMyLike(myLikeDeleteRequestDTO);
     }
 
-    // detail에서 mylike delete
-//    @DeleteMapping("/delete_mylike")
-//    public void deleteMyLike(@RequestBody DTO DTO) {
-//        myLikeService.deleteMyLike(DTO);
+//    @DeleteMapping("/delete/{mylikeid}")
+//    public void deleteMyLike(@PathVariable Long mylikeid,
+//                             @AuthenticationPrincipal Member member) {
+//        myLikeService.deleteMyLikeByMemberIdAndProductId();
 //    }
-
 }
+
+

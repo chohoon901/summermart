@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.CartDeleteRequestDTO;
 import com.example.demo.dto.CartRequestDTO;
 import com.example.demo.dto.CartUpdateDTO;
 import com.example.demo.dto.GetCartResponseDTO;
@@ -27,9 +28,9 @@ public class CartController {
     }
 
     // Controller
-    @DeleteMapping("/delete_cart/{cartid}")
-    public void deleteCart(@PathVariable Long cartid) {
-        cartService.deleteCart(cartid);
+    @DeleteMapping("/delete_cart")
+    public void deleteCart(@RequestBody CartDeleteRequestDTO cartDeleteRequestDTO) {
+        cartService.deleteCart(cartDeleteRequestDTO);
     }
 
     @PatchMapping("/update_cart")

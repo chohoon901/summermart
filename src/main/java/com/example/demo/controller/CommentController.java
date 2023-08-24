@@ -1,9 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.CommentUpdateRequestDTO;
-import com.example.demo.dto.CreateCommentRequestDTO;
-import com.example.demo.dto.GetCommentResponseDTO;
-import com.example.demo.dto.MemberUpdateRequestDTO;
+import com.example.demo.dto.*;
 import com.example.demo.entity.Member;
 import com.example.demo.service.CommentService;
 import lombok.RequiredArgsConstructor;
@@ -33,9 +30,9 @@ public class CommentController {
         return commentService.getComments(productId);
     }
 
-    @DeleteMapping("/delete_comment/{commentid}")
-    public void deleteMyLike(@PathVariable Long commentid) {
-        commentService.deleteComment(commentid);
+    @DeleteMapping("/delete_comment")
+    public void deleteMyLike(@RequestBody CommentDeleteRequestDTO commentDeleteRequestDTO) {
+        commentService.deleteComment(commentDeleteRequestDTO);
     }
 
     @PatchMapping("/update_comment")
