@@ -36,8 +36,8 @@ public class CartService {
 
     }
 
-    public List<GetCartResponseDTO> getAllCarts() {
-        return cartRepository.findAllByMember_Id(1L)
+    public List<GetCartResponseDTO> getAllCarts(Long memberid, Member member) {
+        return cartRepository.findAllByMember_Id(memberid)
                 .stream()
                 .map(GetCartResponseDTO::new)
                 .collect(Collectors.toList());

@@ -19,7 +19,7 @@ public class CommentController {
     @PostMapping("/create_comment/{productId}")
     public void createComment(@RequestBody CreateCommentRequestDTO createCommentRequestDTO,
                               @PathVariable Long productId,
-                              @AuthenticationPrincipal Member member,
+                              @AuthenticationPrincipal Member member, // Sessiong 에서 member 데이터를 가져온다.
                               @RequestHeader("Authorization") String authorizationHeader) {
         commentService.createComment(createCommentRequestDTO, productId, member);
     }

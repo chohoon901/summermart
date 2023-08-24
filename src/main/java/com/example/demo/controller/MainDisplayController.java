@@ -14,8 +14,8 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class MainDisplayController {
-    @Autowired  //<-- 수정 (객체 생성 누락)
-    private MainDisplayService mainDisplayService;
+      //<-- 수정 (객체 생성 누락)
+    private final MainDisplayService mainDisplayService;
     @GetMapping("/display")
     public List<MainDisplayDTO> getTopProducts() {
         int numberOfProductsToDisplay = 10; // 표시할 상품 수

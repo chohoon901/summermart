@@ -16,7 +16,7 @@ public class OrderProductController {
     private final OrderProductService orderProductService;
 
     // @AuthenticationPrincipal
-    @GetMapping("/find_Orderproducts")
+    @GetMapping("/find_orderproducts")
     public List<OrderProductRequestDTO> findOps() {
         return orderProductService.getOrderProducts();
     }

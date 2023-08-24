@@ -50,7 +50,7 @@ public class MyLikeService {
     }
 
     public List<GetMyLikeResponseDTO> getAllLikes() {
-        return myLikeRepository.findAllByMember_Id(1L)
+        return myLikeRepository.findAllByMember_Id(3L)
                 .stream()
                 .map(GetMyLikeResponseDTO::new)
                 .collect(Collectors.toList());
