@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.ProductListDTO;
+import com.example.demo.dto.ProductListResponseDTO;
 import com.example.demo.entity.Product;
 import com.example.demo.repository.ProductListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class ProductListServiceImpl implements ProductListService{
     }
 
     @Override
-    public List<ProductListDTO> getProductsByCriteria(String mainName, String subName, int minPrice, int maxPrice, Pageable pageable) {
+    public List<ProductListResponseDTO> getProductsByCriteria(String mainName, String subName, int minPrice, int maxPrice, Pageable pageable) {
 
         Specification<Product> specification = Specification.where(null);
 
@@ -51,21 +51,21 @@ public class ProductListServiceImpl implements ProductListService{
 
         Page<Product> productPage = productListRepository.findAll(specification, pageable);
 
-        List<ProductListDTO> dtoList = productPage.getContent().stream()
+        List<ProductListResponseDTO> dtoList = productPage.getContent().stream()
                 .map(product -> {
-                    ProductListDTO dto = new ProductListDTO();
+                    ProductListResponseDTO dto = new ProductListResponseDTO();
                     dto.setId(product.getId());
                     dto.setName(product.getName());
                     dto.setPrice(product.getPrice());
                     dto.setPicture(product.getPicture());
                     dto.setDisc(product.getDisc());
-                    dto.setSubName(product.getSubCategory().getSubName());
-                    dto.setMainName(product.getSubCategory().getMainCategory().getMainName());
+//                    dto.setSubName(product.getSubCategory().getSubName());
+//                    dto.setMainName(product.getSubCategory().getMainCategory().getMainName());
                     return dto;
                 })
                 .collect(Collectors.toList());
 
-        CustomPageImpl<ProductListDTO> page= new CustomPageImpl<>(dtoList, pageable, productPage.getTotalElements());
+        CustomPageImpl<ProductListResponseDTO> page= new CustomPageImpl<>(dtoList, pageable, productPage.getTotalElements());
         return page.getContent();
 
     }
