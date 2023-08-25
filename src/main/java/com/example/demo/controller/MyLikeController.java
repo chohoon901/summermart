@@ -20,9 +20,23 @@ public class MyLikeController {
     // @AuthenticationPrincipal
     // @RequestHeader 제거
     // 세션 = DB
+//    @PostMapping("/create_mylike/{productId}")
+//    public void createMyLike(@PathVariable Long productId) {
+//        myLikeService.createMyLike(productId);
+//    }
+
+    // 상품 화면에서 찜 추가
     @PostMapping("/create_mylike/{productId}")
-    public void createMyLike(@PathVariable Long productId) {
-        myLikeService.createMyLike(productId);
+    public void createMyLike(@PathVariable Long productId,
+                             @AuthenticationPrincipal Member member) {
+        myLikeService.createMyLikeById(productId, member);
+    }
+
+    // 상품 화면에서 찜 제거
+    @DeleteMapping("/delete_mylike/{productId}")
+    public void deleteMyLike(@PathVariable Long productId,
+                             @AuthenticationPrincipal Member member) {
+        myLikeService.deleteMyLikeById(productId, member);
     }
 
     @PostMapping("/post_mylike_to_cart/{mylikeid}")
@@ -38,16 +52,13 @@ public class MyLikeController {
         return myLikeService.getAllLikes();
     }
 
+
+    // 찜 화면에서 제거
     @DeleteMapping("/delete_mylike")
     public void deleteMyLike(@RequestBody MyLikeDeleteRequestDTO myLikeDeleteRequestDTO) {
         myLikeService.deleteMyLike(myLikeDeleteRequestDTO);
     }
 
-//    @DeleteMapping("/delete/{mylikeid}")
-//    public void deleteMyLike(@PathVariable Long mylikeid,
-//                             @AuthenticationPrincipal Member member) {
-//        myLikeService.deleteMyLikeByMemberIdAndProductId();
-//    }
 }
 
 

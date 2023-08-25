@@ -13,7 +13,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @OneToMany(mappedBy = "product")
         private List<OrderProduct> orderProducts = new ArrayList<>();

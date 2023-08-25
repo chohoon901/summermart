@@ -25,14 +25,32 @@ public class MyLikeService {
     private final ProductRepository productRepository;
     private final CartRepository cartRepository;
 
+//    public void createMyLike(Long productId) {
+//        MyLike myLike = new MyLike();
+//        myLike.setProduct(productRepository.findById(productId).orElseThrow());
+//        myLike.setMember(memberRepository.findById(3L).orElseThrow());
+//        myLikeRepository.save(myLike);
+//
+//    }
 
-    public void createMyLike(Long productId) {
+    // 성훈씨 작업물
+    public void createMyLikeById(Long productId, Member member) {
         MyLike myLike = new MyLike();
         myLike.setProduct(productRepository.findById(productId).orElseThrow());
+        // member.getid()
         myLike.setMember(memberRepository.findById(3L).orElseThrow());
         myLikeRepository.save(myLike);
-
     }
+
+    public void deleteMyLikeById(Long productId, Member member) {
+        MyLike myLike1 = new MyLike();
+        myLike1.setProduct(productRepository.findById(productId).orElseThrow());
+        // member.getid()
+        myLike1.setMember(memberRepository.findById(3L).orElseThrow());
+        myLikeRepository.deleteByMemberIdAndProductId(3L, productId);
+    }
+
+
     public void postCart (Long id) {
         Optional<MyLike> mylike = myLikeRepository.findById(id);
         MyLike myLikeOne = mylike.get();
@@ -42,10 +60,8 @@ public class MyLikeService {
         cart1.setCount(1);
         Product product = myLikeOne.getProduct();
         Member member = myLikeOne.getMember();
-
         cart1.setProduct(product);
         cart1.setMember(member);
-
         cartRepository.save(cart1);
     }
 
@@ -60,14 +76,5 @@ public class MyLikeService {
         Long myLikeid = myLikeDeleteRequestDTO.getId();
         myLikeRepository.deleteById(myLikeid);
     }
-
-//    public void deleteMyLikeByMemberIdAndProductId(MyLikeDeleteRequestDTO myLikeDeleteRequestDTO) {
-//        Long myLikeId = myLikeRepository.findMyLikeIdByMemberIdAndProductId(
-//                myLikeDeleteRequestDTO.getMemberId(),
-//                myLikeDeleteRequestDTO.getProductId());
-//
-//        myLikeRepository.deleteById(myLikeId);
-//    }
-
 
 }

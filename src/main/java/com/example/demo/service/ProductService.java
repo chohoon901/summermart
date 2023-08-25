@@ -9,6 +9,7 @@ import com.example.demo.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -52,6 +53,21 @@ public class ProductService {
         return new GetProductResponseDTO(product);
     }
 
-
+//    public List<Integer> getProductIds(String productIds) {
+//        List<Integer> productIdList = new ArrayList<>();
+//
+//        if (productIds != null && !productIds.isEmpty()) {
+//            String[] idStrings = productIds.split(",");
+//            for (String idString : idStrings) {
+//                try {
+//                    int productId = Integer.parseInt(idString.trim());
+//                    productIdList.add(productId);
+//                } catch (NumberFormatException e) {
+//                    // Handle invalid number format if needed
+//                }
+//            }
+//        }
+//        return productIdList;
+//    }
 
 }
