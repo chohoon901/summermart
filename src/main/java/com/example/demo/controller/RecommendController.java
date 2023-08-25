@@ -2,19 +2,13 @@ package com.example.demo.controller;
 
 import com.example.demo.repository.RecommendRepository;
 import lombok.RequiredArgsConstructor;
-import net.minidev.json.parser.JSONParser;
 import org.apache.hc.core5.http.ContentType;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
 import org.apache.hc.client5.http.classic.methods.*;
-import org.apache.hc.client5.http.entity.*;
 import org.apache.hc.client5.http.impl.classic.*;
 import org.apache.hc.core5.http.io.entity.*;
-import org.apache.hc.core5.http.message.*;
-import org.json.JSONObject;
+
 
 import java.nio.charset.Charset;
 
