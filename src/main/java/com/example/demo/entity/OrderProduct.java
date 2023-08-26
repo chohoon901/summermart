@@ -21,6 +21,9 @@ public class OrderProduct {
     @JoinColumn(name = "order_id")
     private Orders orders;
 
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus;
+
     private int orderPrice;
     private int count;
 
@@ -33,4 +36,5 @@ public class OrderProduct {
         product.removeStock(count);
         return orderProduct;
     }
+
 }

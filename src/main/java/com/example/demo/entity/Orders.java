@@ -26,11 +26,9 @@ public class Orders {
     @Enumerated(EnumType.STRING)
     private DeliveryStatus deliveryStatus;
 
-    @Enumerated(EnumType.STRING)
-    private OrderStatus orderStatus;
 
     private int count;
-    private LocalDateTime date;
+//    private LocalDateTime date;
 
     public void setMember(Member member){
         if(this.member!=null) {
@@ -52,9 +50,9 @@ public class Orders {
         for(OrderProduct orderProduct : orderProducts){
             orders.addOrderItem(orderProduct);
         }
-        orders.setOrderStatus(OrderStatus.ORDER);
+
         orders.setDeliveryStatus(DeliveryStatus.READY);
-        orders.setDate(LocalDateTime.now());
+//        orders.setDate(LocalDateTime.now());
         return orders;
     }
 

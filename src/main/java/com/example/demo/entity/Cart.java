@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 
@@ -10,7 +11,7 @@ public class Cart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
@@ -21,6 +22,14 @@ public class Cart {
     private Product product;
 
     private int count;
+
+    public void addCount() {
+        this.count++;
+    }
+
+    public void deleteCount() {
+        this.count--;
+    }
 
     public void setMember(Member member){
         if(this.member!=null) {

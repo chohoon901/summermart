@@ -35,12 +35,12 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
 		String header = request.getHeader(JwtProperties.HEADER_STRING);
 		System.out.println("header Authorization : " + header);
-		
+
 		if (header == null || !header.startsWith(JwtProperties.TOKEN_PREFIX)) {
 			chain.doFilter(request, response);
 			return;
 		}
-		
+
 		String token = request.getHeader(JwtProperties.HEADER_STRING).replace(JwtProperties.TOKEN_PREFIX, "");
 
 		// 토큰 검증 (이게 인증이기 때문에 AuthenticationManager도 필요 없음)

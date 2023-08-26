@@ -12,6 +12,7 @@ public class ProductDTO {
     private String subName;
     private String mainName;
     private double disc;
+    private int commentCount;
 
 
     public ProductDTO() {
@@ -25,5 +26,6 @@ public class ProductDTO {
         stock = product.getStock();
         price = product.getPrice();
         disc = product.getDisc();
+        commentCount = product.getCommentCount();
     }
 }

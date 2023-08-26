@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.CreateCommentRequestDTO;
-import com.example.demo.dto.GetCommentResponseDTO;
+import com.example.demo.dto.*;
 import com.example.demo.entity.Member;
 import com.example.demo.service.CommentService;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +19,7 @@ public class CommentController {
     @PostMapping("/create_comment/{productId}")
     public void createComment(@RequestBody CreateCommentRequestDTO createCommentRequestDTO,
                               @PathVariable Long productId,
-                              @AuthenticationPrincipal Member member,
+                              @AuthenticationPrincipal Member member, // Sessiong 에서 member 데이터를 가져온다.
                               @RequestHeader("Authorization") String authorizationHeader) {
         commentService.createComment(createCommentRequestDTO, productId, member);
     }
@@ -29,5 +28,17 @@ public class CommentController {
     public List<GetCommentResponseDTO> showComment(@PathVariable Long productId,
                                                    @RequestHeader("Authorization") String authorizationHeader) {
         return commentService.getComments(productId);
+    }
+
+    @DeleteMapping("/delete_comment")
+    public void deleteMyLike(@RequestBody CommentDeleteRequestDTO commentDeleteRequestDTO) {
+        commentService.deleteComment(commentDeleteRequestDTO);
+    }
+
+    @PatchMapping("/update_comment")
+    public void updateComment(@RequestBody CommentUpdateRequestDTO commentUpdateRequestDTO) {
+//        System.out.println("memberUpdateRequestDTO = " + memberUpdateRequestDTO);
+//        return null;
+        commentService.updateComment(commentUpdateRequestDTO);
     }
 }

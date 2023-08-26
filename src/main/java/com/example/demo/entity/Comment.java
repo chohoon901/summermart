@@ -12,7 +12,7 @@ public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
@@ -40,12 +40,11 @@ public class Comment {
         product.getComments().add(this);
     }
 
-//    public static Comment createComment(Product product, String body, LocalDateTime date) {
-//        Comment comment = new Comment();
-//        comment.setProduct(product);
-//        comment.setBody(body);
-//        comment.setDate(date);
-//
-//        return comment;
-//    }
+    public static Comment createComment(Product product, String body) {
+        Comment comment = new Comment();
+        comment.setProduct(product);
+        comment.setBody(body);
+
+        return comment;
+    }
 }
