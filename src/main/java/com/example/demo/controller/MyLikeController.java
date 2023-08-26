@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.GetMyLikeResponseDTO;
-import com.example.demo.entity.MyLike;
+import com.example.demo.entity.Member;
 import com.example.demo.service.MyLikeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -18,13 +18,14 @@ public class MyLikeController {
     // @AuthenticationPrincipal
     // @RequestHeader 제거
     @PostMapping("/create_mylike/{productId}")
-    public void createMyLike(@PathVariable Long productId) {
-        myLikeService.createMyLike(productId);
+    public void createMyLike(@PathVariable Long productId,
+                             @AuthenticationPrincipal Member member) {
+        myLikeService.createMyLike(productId, member);
     }
 
     // @AuthenticationPrincipal
     @GetMapping("/select_mylike")
-    public List<GetMyLikeResponseDTO> getAllLikes() {
-        return myLikeService.getAllLikes();
+    public List<GetMyLikeResponseDTO> getAllLikes(@AuthenticationPrincipal Member member) {
+        return myLikeService.getAllLikes(member);
     }
 }

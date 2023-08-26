@@ -26,8 +26,8 @@ public class CartController {
         return cartService.getAllCarts(member);
     }
 
-    @DeleteMapping("/delete_cart/{cartid}")
-    public void deleteCart(@PathVariable Long cartid) {
+    @DeleteMapping("/delete_cart")
+    public void deleteCart(@RequestParam("id") Long cartid) {
         cartService.deleteCart(cartid);
     }
 }

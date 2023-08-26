@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.GetMemberResponseDTO;
 import com.example.demo.dto.GetMyLikeResponseDTO;
 import com.example.demo.entity.Member;
 import com.example.demo.entity.MyLike;
@@ -21,16 +20,18 @@ public class MyLikeService {
     private final ProductRepository productRepository;
 
 
-    public void createMyLike(Long productId) {
+    public void createMyLike(Long productId, Member member) {
+        Long id = memberRepository.findByUsername(member.getUsername()).getId();
         MyLike myLike = new MyLike();
         myLike.setProduct(productRepository.findById(productId).orElseThrow());
-        myLike.setMember(memberRepository.findById(1L).orElseThrow());
+        myLike.setMember(memberRepository.findById(id).orElseThrow());
         myLikeRepository.save(myLike);
 
     }
 
-    public List<GetMyLikeResponseDTO> getAllLikes() {
-        return myLikeRepository.findAllByMember_Id(1L)
+    public List<GetMyLikeResponseDTO> getAllLikes(Member member) {
+        Long id = memberRepository.findByUsername(member.getUsername()).getId();
+        return myLikeRepository.findAllByMember_Id(id)
                 .stream()
                 .map(GetMyLikeResponseDTO::new)
                 .collect(Collectors.toList());

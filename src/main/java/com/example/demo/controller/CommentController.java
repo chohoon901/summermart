@@ -19,14 +19,12 @@ public class CommentController {
     @PostMapping("/create_comment/{productId}")
     public void createComment(@RequestBody CreateCommentRequestDTO createCommentRequestDTO,
                               @PathVariable Long productId,
-                              @AuthenticationPrincipal Member member,
-                              @RequestHeader("Authorization") String authorizationHeader) {
+                              @AuthenticationPrincipal Member member) {
         commentService.createComment(createCommentRequestDTO, productId, member);
     }
 
-    @GetMapping("/select_comment/{productId}")
-    public List<GetCommentResponseDTO> showComment(@PathVariable Long productId,
-                                                   @RequestHeader("Authorization") String authorizationHeader) {
+    @GetMapping("/show_comments/{productId}")
+    public List<GetCommentResponseDTO> showComment(@PathVariable Long productId) {
         return commentService.getComments(productId);
     }
 }

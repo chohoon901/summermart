@@ -3,7 +3,6 @@ package com.example.demo.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -11,7 +10,7 @@ public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
@@ -37,13 +36,5 @@ public class Comment {
         }
         this.product = product;
         product.getComments().add(this);
-    }
-
-    public static Comment createComment(Product product, String body) {
-        Comment comment = new Comment();
-        comment.setProduct(product);
-        comment.setBody(body);
-
-        return comment;
     }
 }

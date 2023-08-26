@@ -14,7 +14,6 @@ public class MainDisplayService {
     private final MainDisplayRepository mainDisplayRepository;
     @Autowired
     public MainDisplayService(MainDisplayRepository mainDisplayRepository) {
-        System.out.println("MainDisplayService constructor call");
         this.mainDisplayRepository = mainDisplayRepository;
     }
     public List<MainDisplayDTO> getTopProducts(int count) {

@@ -35,7 +35,7 @@ public class CommentService {
     }
 
     public List<GetCommentResponseDTO> getComments(Long productId) {
-        return commentRepository.findByProductIdWithMemberFetch(productId)
+        return commentRepository.findCommentsByProductId(productId)
                 .stream()
                 .map(this::entityToDto)
                 .collect(Collectors.toList());

@@ -31,7 +31,10 @@ public class KakaoPayService {
         parameters.add("item_name", postKakaoRequestDTO.getItem_name());
         parameters.add("quantity", String.valueOf(postKakaoRequestDTO.getQuantity()));
         parameters.add("total_amount", String.valueOf(postKakaoRequestDTO.getTotal_amount()));
-        parameters.add("tax_free_amount", "상품 비과세 금액");
+//        parameters.add("item_name", "선풍기");
+//        parameters.add("quantity", "5");
+//        parameters.add("total_amount", "45000");
+        parameters.add("tax_free_amount", "1");
         parameters.add("approval_url", "http://localhost:8080/payment/success"); // 성공 시 redirect url
         parameters.add("cancel_url", "http://localhost:8080/payment/cancel"); // 취소 시 redirect url
         parameters.add("fail_url", "http://localhost:8080/payment/fail"); // 실패 시 redirect url
