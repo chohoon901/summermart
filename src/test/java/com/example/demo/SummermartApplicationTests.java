@@ -1,6 +1,6 @@
 package com.example.demo;
 
-import com.example.demo.entity.Recommend;
+import com.example.demo.entity.Product;
 import com.example.demo.repository.RecommendRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ class SummermartApplicationTests {
 
 	@Test
 	void contextLoads() {
-		List<Recommend> result = repository.findProd("메밀");
+		List<Product> result = repository.findProd("국수");
 		System.out.println(result);
 	}
 

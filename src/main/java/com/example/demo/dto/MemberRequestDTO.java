@@ -2,6 +2,7 @@ package com.example.demo.dto;
 
 
 import com.example.demo.entity.Member;
+import lombok.Builder;
 import lombok.Data;
 
 // 회원가입 요청DTO
@@ -31,7 +32,5 @@ public class MemberRequestDTO {
 //        phone = member.getPhone();
 //
 //    }
-
-
 
 }

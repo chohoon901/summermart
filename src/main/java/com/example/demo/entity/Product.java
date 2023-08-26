@@ -13,10 +13,10 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @OneToMany(mappedBy = "product")
-        private List<OrderProduct> orderProducts = new ArrayList<>();
+    private List<OrderProduct> orderProducts = new ArrayList<>();
 
     @OneToMany(mappedBy = "product")
     private List<Cart> carts = new ArrayList<>();
@@ -59,7 +59,7 @@ public class Product {
         this.stock = restStock;
     }
 
-    public void addComment() {
+    public void addComment () {
         this.commentCount++;
     }
 

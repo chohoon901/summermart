@@ -6,6 +6,8 @@ import com.example.demo.dto.kakao.PostKakaoRequestDTO;
 import com.example.demo.service.OrderProductService;
 import com.example.demo.service.kakaoPay.KakaoPayService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -29,11 +31,9 @@ public class KakaoPayController {
     public String afterPayRequest(@RequestParam("pg_token") String pgToken) {
 
         KakaoApproveResponse kakaoApprove = kakaoPayService.approveResponse(pgToken);
-//        orderProductService.createOrderProduct(kakaoApprove);
-        //return new ResponseEntity<>(kakaoApprove, HttpStatus.OK);
-        return "결제 했어용!!";
+        orderProductService.createOrderProduct(kakaoApprove);
+        return new ResponseEntity<>(kakaoApprove, HttpStatus.OK);
     }
-
 //    /**
 //     * 결제 진행 중 취소
 //     */
@@ -51,4 +51,5 @@ public class KakaoPayController {
 //
 //        throw new BusinessLogicException(ExceptionCode.PAY_FAILED);
 //    }
+
 }

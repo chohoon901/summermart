@@ -3,12 +3,15 @@ package com.example.demo.controller;
 import com.example.demo.dto.GetComparePasswordDTO;
 import com.example.demo.dto.GetMemberResponseDTO;
 import com.example.demo.config.auth.PrincipalDetails;
+import com.example.demo.dto.MemberRequestDTO;
+import com.example.demo.dto.MemberUpdateRequestDTO;
 import com.example.demo.entity.Member;
 import com.example.demo.repository.MemberRepository;
 import com.example.demo.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -42,43 +45,45 @@ public class MemberController {
         return "회원가입완료";
     }
 
-
-    @GetMapping("/test")
-    public String testPrincipal() {
-//        System.out.println("Authentication = " + SecurityContextHolder.getContext().getAuthentication().toString());
-//        PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal(); // 세션 가져오기
-//        System.out.println("authentication = " + principalDetails.getUsername());
-        UsernamePasswordAuthenticationToken authentication =(UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
-        PrincipalDetails prin = (PrincipalDetails) authentication.getPrincipal();
-        Member m = prin.getMember();
-        return m.getRoles();
-    }
-
-    // 어디쓸지 잘 모름
-    @GetMapping("/select_member")
-    public GetMemberResponseDTO findMember(@AuthenticationPrincipal Member member) {
-        return memberService.getMember(member);
-    }
-
     @GetMapping("/select_AllMembers")
-    public List<GetMemberResponseDTO> findMembers() {
+    public List<GetMemberResponseDTO> findAllMember() {
+
         return memberService.getAllMembers();
     }
 
+    // Member 보안문제로 id 값이 정해져 있음 (다른 사람 정보를 못가져옴)
+    @GetMapping("/select_member")
+    public GetMemberResponseDTO findMember(@AuthenticationPrincipal Member member) {
+
+        return memberService.getMember(member);
+    }
+
+    // 정보 수정을 위한 비밀번호 재확인
     @GetMapping("/compare_password")
     public Boolean findMember(@AuthenticationPrincipal Member member,
                               @RequestBody GetComparePasswordDTO getComparePasswordDTO) {
         return memberService.comparePassword(member, getComparePasswordDTO);
     }
 
+    @PatchMapping("/update_member")
+    public void updateMember(@RequestBody MemberUpdateRequestDTO memberUpdateRequestDTO) {
+//        System.out.println("memberUpdateRequestDTO = " + memberUpdateRequestDTO);
+//        return null;
+        memberService.updateMember(memberUpdateRequestDTO);
+    }
 
-//    @DeleteMapping
-//
-//    @PutMapping
-//
-//    @PatchMapping
+    // 리엑트에서 요청한 JSON이 RequestBody
+    // get 요청도 마찬가지
+//    @PostMapping("/create_member")
+//    public void createMember(@RequestBody MemberRequestDTO memberRequestDTO) {
+//        memberService.createMember(memberRequestDTO);
+//    }
 
-    // Member 보안문제로 id 값이 정해져 있음 (다른 사람 정보를 못가져옴)
-
+//    RequestParam 사용금지 하위호한
+//    Product Path Variable 사용, 주소의 id가 들어있을 때
+//    @GetMapping("/select_member/{id}")
+//    public GetMemberResponseDTO findMember(@PathVariable Long id) {
+//        return memberService.getMember(id);
+//    }
 
 }

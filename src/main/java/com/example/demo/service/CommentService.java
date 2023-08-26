@@ -1,7 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.CreateCommentRequestDTO;
-import com.example.demo.dto.GetCommentResponseDTO;
+import com.example.demo.dto.*;
 import com.example.demo.entity.Comment;
 import com.example.demo.entity.Member;
 import com.example.demo.repository.CommentRepository;
@@ -50,8 +49,20 @@ public class CommentService {
         return getCommentResponseDTO;
     }
 
+    public void deleteComment(CommentDeleteRequestDTO commentDeleteRequestDTO) {
+        Long commentid = commentDeleteRequestDTO.getId();
+        commentRepository.deleteById(commentid);
+    }
 
+    public void updateComment(CommentUpdateRequestDTO commentUpdateRequestDTO) {
+        Comment comment = commentRepository.findById(commentUpdateRequestDTO.getId())
+                .orElseThrow(()->new IllegalArgumentException("해당 회원이 없습니다. id="+commentUpdateRequestDTO.getId()));
 
-//    public void get
+        if(commentUpdateRequestDTO.getBody()!=null){
+            comment.setBody(commentUpdateRequestDTO.getBody());
+
+            commentRepository.save(comment);
+        }
+    }
 
 }

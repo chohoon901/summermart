@@ -3,13 +3,13 @@ package com.example.demo.service;
 import com.example.demo.dto.GetComparePasswordDTO;
 import com.example.demo.dto.GetMemberResponseDTO;
 import com.example.demo.dto.MemberRequestDTO;
+import com.example.demo.dto.MemberUpdateRequestDTO;
 import com.example.demo.entity.Member;
 import com.example.demo.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 // 컨트롤러 -> 서비스 -> 레퍼지토리 -> 엔티티(DB)
@@ -55,7 +55,6 @@ public class MemberService {
 
         // MemberRepository 전자레인지에는 Member 그릇밖에 못들어간다 (DTO는 못들어간다)
 
-
     }
 
     // List 여러 개를 리스트에 담는다
@@ -74,6 +73,7 @@ public class MemberService {
     public GetMemberResponseDTO getMember(Member member) {
         Member member1 = memberRepository.findByUsername(member.getUsername());
         return new GetMemberResponseDTO(member1);
+
     }
 
     public Boolean comparePassword(Member member, GetComparePasswordDTO getComparePasswordDTO) {
@@ -82,7 +82,6 @@ public class MemberService {
         if(member.getPassword().equals(getComparePasswordDTO.getPassword())) {
             isCorrect = true;
         }
-
         return isCorrect;
     }
 
@@ -94,6 +93,35 @@ public class MemberService {
 //        return new GetMemberResponseDTO(member);
 //    }
 
+    public void updateMember(MemberUpdateRequestDTO memberUpdateRequestDTO) {
+        Member member = memberRepository.findById(memberUpdateRequestDTO.getId())
+                .orElseThrow(()->new IllegalArgumentException("해당 회원이 없습니다. id="+memberUpdateRequestDTO.getId()));
+//        Member member = memberRepository.findById(3L)
+//                .orElseThrow(()->new IllegalArgumentException("해당 회원이 없습니다. id="+3L));
 
+        if(memberUpdateRequestDTO.getAddress()!=null){
+            member.setAddress(memberUpdateRequestDTO.getAddress());
+        }
+        if(memberUpdateRequestDTO.getUsername()!=null){
+            member.setUsername(memberUpdateRequestDTO.getUsername());
+        }
+        if(memberUpdateRequestDTO.getPassword()!=null){
+            member.setPassword(memberUpdateRequestDTO.getPassword());
+        }
+        if(memberUpdateRequestDTO.getName()!=null){
+            member.setName(memberUpdateRequestDTO.getName());
+        }
+        if(memberUpdateRequestDTO.getUsername()!=null){
+            member.setPhone(memberUpdateRequestDTO.getPhone());
+        }
+
+//        member.update(memberUpdateRequestDTO.getAddress(),
+//                      memberUpdateRequestDTO.getUsername(),
+//                      memberUpdateRequestDTO.getPassword(),
+//                      memberUpdateRequestDTO.getName(),
+//                      memberUpdateRequestDTO.getPhone());
+
+        memberRepository.save(member);
+    }
 
 }

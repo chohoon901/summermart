@@ -1,11 +1,10 @@
 package com.example.demo.dto;
 
-import com.example.demo.entity.MyLike;
-import com.example.demo.entity.Product;
 import lombok.Data;
 
 @Data
-public class CreateMyLikeResponseDTO {
+public class CreateMyLikeRequestDTO {
+    private Long id;
     private String name;
     private String picture;
     private int price;

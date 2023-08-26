@@ -8,6 +8,7 @@ import lombok.Data;
 
 @Data
 public class OrderProductRequestDTO {
+    private Long id;
     private String name;
     private int price;
     private int count;
@@ -16,6 +17,7 @@ public class OrderProductRequestDTO {
     private OrderStatus orderStatus;
 
     public OrderProductRequestDTO(OrderProduct orderProduct) {
+        id = orderProduct.getId();
         name = orderProduct.getProduct().getName();
         price = orderProduct.getOrderPrice();
         count = orderProduct.getCount();
@@ -37,6 +39,7 @@ public class OrderProductRequestDTO {
 
     public OrderProduct toEntity() {
         OrderProduct orderProduct = new OrderProduct();
+        orderProduct.setId(id);
         orderProduct.getProduct().setName(name);
         orderProduct.setOrderPrice(price);
         orderProduct.setCount(count);

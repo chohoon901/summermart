@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.CreateCommentRequestDTO;
-import com.example.demo.dto.GetCommentResponseDTO;
+import com.example.demo.dto.*;
 import com.example.demo.entity.Member;
 import com.example.demo.service.CommentService;
 import lombok.RequiredArgsConstructor;
@@ -26,5 +25,17 @@ public class CommentController {
     @GetMapping("/show_comments/{productId}")
     public List<GetCommentResponseDTO> showComment(@PathVariable Long productId) {
         return commentService.getComments(productId);
+    }
+
+    @DeleteMapping("/delete_comment")
+    public void deleteMyLike(@RequestBody CommentDeleteRequestDTO commentDeleteRequestDTO) {
+        commentService.deleteComment(commentDeleteRequestDTO);
+    }
+
+    @PatchMapping("/update_comment")
+    public void updateComment(@RequestBody CommentUpdateRequestDTO commentUpdateRequestDTO) {
+//        System.out.println("memberUpdateRequestDTO = " + memberUpdateRequestDTO);
+//        return null;
+        commentService.updateComment(commentUpdateRequestDTO);
     }
 }
