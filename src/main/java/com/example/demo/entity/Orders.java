@@ -26,8 +26,6 @@ public class Orders {
     @Enumerated(EnumType.STRING)
     private DeliveryStatus deliveryStatus;
 
-    @Enumerated(EnumType.STRING)
-    private OrderStatus orderStatus;
 
     private int count;
 //    private LocalDateTime date;
@@ -52,7 +50,7 @@ public class Orders {
         for(OrderProduct orderProduct : orderProducts){
             orders.addOrderItem(orderProduct);
         }
-        orders.setOrderStatus(OrderStatus.ORDER);
+
         orders.setDeliveryStatus(DeliveryStatus.READY);
 //        orders.setDate(LocalDateTime.now());
         return orders;

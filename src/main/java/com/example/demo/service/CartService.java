@@ -21,7 +21,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CartService {
 
-    private final MyLikeRepository myLikeRepository;
     private final ProductRepository productRepository;
     private final MemberRepository memberRepository;
     private final CartRepository cartRepository;
@@ -29,21 +28,27 @@ public class CartService {
     // id 1번인 member로 고정
     public void createCart(Long productId, CartRequestDTO cartRequestDTO) {
         Cart cart = new Cart();
-        cart.setMember(memberRepository.findById(1L).orElseThrow());
+        cart.setMember(memberRepository.findById(3L).orElseThrow());
         cart.setProduct(productRepository.findById(productId).orElseThrow());
         cart.setCount(cartRequestDTO.getCount());
         cartRepository.save(cart);
 
     }
 
-    public List<GetCartResponseDTO> getAllCarts(Long memberid, Member member) {
-        return cartRepository.findAllByMember_Id(memberid)
+    public List<GetCartResponseDTO> getAllCarts(Member member) {
+        return cartRepository.findAllByMember_Id(3L)
                 .stream()
                 .map(GetCartResponseDTO::new)
                 .collect(Collectors.toList());
     }
 
-    // Service
+    // Test
+//    public Cart getCart() {
+//        Cart cart = cartRepository.findByMemberIdAndProductId(3L,5L);
+//        System.out.println("cart 값 = " + cart.getCount());
+//        return cart;
+//    }
+
     public void deleteCart(CartDeleteRequestDTO cartDeleteRequestDTO) {
         Long cartid = cartDeleteRequestDTO.getId();
         cartRepository.deleteById(cartid);
@@ -52,9 +57,6 @@ public class CartService {
     public void UpdateCart(CartUpdateDTO cartUpdateDTO){
         Cart cart = cartRepository.findById(cartUpdateDTO.getId())
                 .orElseThrow(()->new IllegalArgumentException("해당 회원이 없습니다. id=" + cartUpdateDTO.getId()));
-
-//        Cart cart = cartRepository.findById(1L)
-//                .orElseThrow(()->new IllegalArgumentException("해당 회원이 없습니다. id=" + 1L));
 
 //        int countToUpdate = cartUpdateDTO.getCount();
 //        if (countToUpdate != 0) {

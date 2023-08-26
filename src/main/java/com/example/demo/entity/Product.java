@@ -16,7 +16,7 @@ public class Product {
     private Long id;
 
     @OneToMany(mappedBy = "product")
-        private List<OrderProduct> orderProducts = new ArrayList<>();
+    private List<OrderProduct> orderProducts = new ArrayList<>();
 
     @OneToMany(mappedBy = "product")
     private List<Cart> carts = new ArrayList<>();

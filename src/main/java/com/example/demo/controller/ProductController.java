@@ -1,11 +1,15 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.CreateOrderRequestDTO;
 import com.example.demo.dto.GetProductResponseDTO;
 import com.example.demo.dto.ProductDTO;
+import com.example.demo.entity.Member;
 import com.example.demo.entity.Product;
+import com.example.demo.repository.MemberRepository;
 import com.example.demo.repository.ProductRepository;
 import com.example.demo.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +19,7 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
+
 
     @PostMapping("/create_product")
     public void createProductDto(@RequestBody ProductDTO productDTO) {
@@ -31,6 +36,16 @@ public class ProductController {
         return productService.getShowProduct(id);
     }
 
+
+    @PostMapping("/create_orderProduct")
+    public void createOrderProducts(
+            @RequestBody CreateOrderRequestDTO request,
+            @AuthenticationPrincipal Member member) {
+        productService.createOrderProductsFromProductIds(request.getProductIds(), member);
+//        System.out.println("Json 값 : " + request.getProductIds());
+//        System.out.println("member 값 : " + member);
+
+    }
 
 
 //    private final ProductService productService;

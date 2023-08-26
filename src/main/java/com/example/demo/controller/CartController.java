@@ -24,12 +24,17 @@ public class CartController {
         cartService.createCart(productId, cartRequestDTO);
     }
 
-    @GetMapping("/select_cart/{memberid}")
-    public List<GetCartResponseDTO> getAllCarts(@PathVariable Long memberid,
-                                                @AuthenticationPrincipal Member member,
+    @GetMapping("/select_cart")
+    public List<GetCartResponseDTO> getAllCarts(@AuthenticationPrincipal Member member,
                                                 @RequestHeader("Authorization") String authorizationHeader) {
-        return cartService.getAllCarts(memberid, member);
+        return cartService.getAllCarts(member);
     }
+
+    // test
+//    @GetMapping("/test_cart")
+//    public Cart getCart() {
+//        return cartService.getCart();
+//    }
 
     // Controller
     @DeleteMapping("/delete_cart")

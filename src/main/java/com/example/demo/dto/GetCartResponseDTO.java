@@ -17,5 +17,7 @@ public class GetCartResponseDTO {
         price = cart.getProduct().getPrice();
         picture = cart.getProduct().getPicture();
         count = cart.getCount();
+
     }
+
 }
