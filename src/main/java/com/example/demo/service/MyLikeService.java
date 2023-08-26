@@ -21,10 +21,9 @@ public class MyLikeService {
 
 
     public void createMyLike(Long productId, Member member) {
-        Long id = memberRepository.findByUsername(member.getUsername()).getId();
         MyLike myLike = new MyLike();
         myLike.setProduct(productRepository.findById(productId).orElseThrow());
-        myLike.setMember(memberRepository.findById(id).orElseThrow());
+        myLike.setMember(memberRepository.findByUsername(member.getUsername()));
         myLikeRepository.save(myLike);
 
     }
@@ -36,5 +35,6 @@ public class MyLikeService {
                 .map(GetMyLikeResponseDTO::new)
                 .collect(Collectors.toList());
     }
+
 
 }

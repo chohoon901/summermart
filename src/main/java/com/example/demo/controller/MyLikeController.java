@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.GetMyLikeResponseDTO;
+import com.example.demo.dto.CreateCommentRequestDTO;
 import com.example.demo.entity.Member;
 import com.example.demo.service.MyLikeService;
 import lombok.RequiredArgsConstructor;

@@ -7,6 +7,7 @@ import com.example.demo.entity.Member;
 import com.example.demo.repository.MemberRepository;
 import com.example.demo.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -43,11 +44,14 @@ public class MemberController {
 
 
     @GetMapping("/test")
-    public String testPrincipal(Authentication authentication) {
+    public String testPrincipal() {
 //        System.out.println("Authentication = " + SecurityContextHolder.getContext().getAuthentication().toString());
-        PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal(); // 세션 가져오기
-        System.out.println("authentication = " + principalDetails.getUsername());
-        return principalDetails.getUsername();
+//        PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal(); // 세션 가져오기
+//        System.out.println("authentication = " + principalDetails.getUsername());
+        UsernamePasswordAuthenticationToken authentication =(UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+        PrincipalDetails prin = (PrincipalDetails) authentication.getPrincipal();
+        Member m = prin.getMember();
+        return m.getRoles();
     }
 
     // 어디쓸지 잘 모름
