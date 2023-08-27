@@ -32,22 +32,14 @@ public class CartService {
         cart.setProduct(productRepository.findById(productId).orElseThrow());
         cart.setCount(cartRequestDTO.getCount());
         cartRepository.save(cart);
-
     }
 
-    public List<GetCartResponseDTO> getAllCarts(Member member) {
-        return cartRepository.findAllByMember_Id(3L)
+    public List<GetCartResponseDTO> getAllCarts() {
+        return cartRepository.findAllByMember_Id(1L)
                 .stream()
                 .map(GetCartResponseDTO::new)
                 .collect(Collectors.toList());
     }
-
-    // Test
-//    public Cart getCart() {
-//        Cart cart = cartRepository.findByMemberIdAndProductId(3L,5L);
-//        System.out.println("cart 값 = " + cart.getCount());
-//        return cart;
-//    }
 
     public void deleteCart(CartDeleteRequestDTO cartDeleteRequestDTO) {
         Long cartid = cartDeleteRequestDTO.getId();

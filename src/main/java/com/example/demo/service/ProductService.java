@@ -47,10 +47,12 @@ public class ProductService {
     // 단건 조회
     public GetProductResponseDTO getShowProduct(Long id) {
 
-        Product product = productRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 상품이 없습니다. id=" + id));
+        Product product = productRepository.findById(id).
+                orElseThrow(() -> new IllegalArgumentException("해당 상품이 없습니다. id=" + id));
 
         return new GetProductResponseDTO(product);
     }
+
 
     public void createOrderProductsFromProductIds(String productIdsString, Member member) {
 
@@ -69,8 +71,8 @@ public class ProductService {
 
         // 사용자 이름을 기반으로 회원 ID를 검색합니다.
         // 주의: 'findByUsername'의 결과를 'member' 변수에 할당해야 합니다.
-        Member user = memberRepository.findByUsername("acac");
-//        Member user = memberRepository.findByUsername(member.getUsername());
+//        Member user = memberRepository.findByUsername("acac");
+        Member user = memberRepository.findByUsername(member.getUsername());
         List<OrderProduct> orderProducts = new ArrayList<>();
 
         // 각 제품에 대해 OrderProduct 인스턴스를 생성합니다.
@@ -81,7 +83,14 @@ public class ProductService {
 
             orderProduct.setProduct(product);
 //            orderProduct.getProduct().setName(product.getName());
-            orderProduct.setOrderPrice((int) (product.getPrice() * product.getDisc()));
+
+            // Calculate orderPrice, handling case where price or disc is 0
+            double price = product.getPrice();
+            double disc = product.getDisc();
+            double orderPrice = (price == 0 || disc == 0) ? price : price * disc;
+            orderProduct.setOrderPrice((int) orderPrice);
+//            orderProduct.setOrderPrice((int) (product.getPrice() * product.getDisc()));
+
             // 제품 ID와 회원 ID 조합에 기반하여 카트 카운트를 검색합니다.
             // 매개변수 위치 주의
             Cart cart = cartRepository.findByMemberIdAndProductId(user.getId(), product.getId());

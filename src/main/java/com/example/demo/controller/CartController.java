@@ -29,14 +29,8 @@ public class CartController {
     @GetMapping("/select_cart")
     public List<GetCartResponseDTO> getAllCarts(@AuthenticationPrincipal Member member,
                                                 @RequestHeader("Authorization") String authorizationHeader) {
-        return cartService.getAllCarts(member);
+        return cartService.getAllCarts();
     }
-
-    // test
-//    @GetMapping("/test_cart")
-//    public Cart getCart() {
-//        return cartService.getCart();
-//    }
 
     // Controller
     @DeleteMapping("/delete_cart")
