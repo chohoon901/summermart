@@ -21,6 +21,10 @@ public class OrderProduct {
     @JoinColumn(name = "order_id")
     private Orders orders;
 
+//    @Enumerated(EnumType.STRING)
+//    private OrderStatus orderStatus;
+
+    // Initialize the orderStatus with the default value "CANCEL"
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 

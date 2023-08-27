@@ -69,8 +69,8 @@ public class ProductService {
 
         // 사용자 이름을 기반으로 회원 ID를 검색합니다.
         // 주의: 'findByUsername'의 결과를 'member' 변수에 할당해야 합니다.
-        Member user = memberRepository.findByUsername(member.getUsername());
-
+        Member user = memberRepository.findByUsername("acac");
+//        Member user = memberRepository.findByUsername(member.getUsername());
         List<OrderProduct> orderProducts = new ArrayList<>();
 
         // 각 제품에 대해 OrderProduct 인스턴스를 생성합니다.

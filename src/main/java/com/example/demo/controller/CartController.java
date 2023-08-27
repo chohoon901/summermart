@@ -20,7 +20,9 @@ public class CartController {
     private final CartService cartService;
 
     @PostMapping("/create_cart/{productId}")
-    public void createCart(@PathVariable Long productId, @RequestBody CartRequestDTO cartRequestDTO) {
+    public void createCart(@AuthenticationPrincipal Member member,
+                           @PathVariable Long productId,
+                           @RequestBody CartRequestDTO cartRequestDTO) {
         cartService.createCart(productId, cartRequestDTO);
     }
 

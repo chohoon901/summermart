@@ -14,7 +14,7 @@ public class OrderProductRequestDTO {
     private int count;
     private String picture;
     private DeliveryStatus deliverystatus;
-    private OrderStatus orderStatus;
+//    private OrderStatus orderStatus;
 
     public OrderProductRequestDTO(OrderProduct orderProduct) {
         id = orderProduct.getId();
@@ -23,7 +23,7 @@ public class OrderProductRequestDTO {
         count = orderProduct.getCount();
         picture = orderProduct.getProduct().getPicture();
         deliverystatus = orderProduct.getOrders().getDeliveryStatus();
-        orderStatus = orderProduct.getOrders().getOrderStatus();
+//        orderStatus = orderProduct.getOrders().getOrderStatus();
     }
 
     public OrderProductRequestDTO() {
@@ -45,7 +45,7 @@ public class OrderProductRequestDTO {
         orderProduct.setCount(count);
         orderProduct.getProduct().setPicture(picture);
         orderProduct.getOrders().setDeliveryStatus(deliverystatus);
-        orderProduct.getOrders().setOrderStatus(orderStatus);
+//        orderProduct.getOrders().setOrderStatus(orderStatus);
         return orderProduct;
     }
 }
