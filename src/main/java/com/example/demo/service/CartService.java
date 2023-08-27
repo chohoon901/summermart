@@ -34,7 +34,7 @@ public class CartService {
         cartRepository.save(cart);
     }
 
-    public List<GetCartResponseDTO> getAllCarts() {
+    public List<GetCartResponseDTO> getAllCarts(Member member) {
         return cartRepository.findAllByMember_Id(1L)
                 .stream()
                 .map(GetCartResponseDTO::new)

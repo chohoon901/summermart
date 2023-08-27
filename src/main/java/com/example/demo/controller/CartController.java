@@ -29,7 +29,7 @@ public class CartController {
     @GetMapping("/select_cart")
     public List<GetCartResponseDTO> getAllCarts(@AuthenticationPrincipal Member member,
                                                 @RequestHeader("Authorization") String authorizationHeader) {
-        return cartService.getAllCarts();
+        return cartService.getAllCarts(member);
     }
 
     // Controller
