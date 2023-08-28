@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class GetProductResponseDTO {
+//    private Long id;
     private String name;
     private int stock;
     private int price;
@@ -17,6 +18,7 @@ public class GetProductResponseDTO {
 
     public GetProductResponseDTO(Product product) {
 
+//        id = product.getId();
         mainName = product.getSubCategory().getMainCategory().getMainName();
         subName = product.getSubCategory().getSubName();
         picture = product.getPicture();

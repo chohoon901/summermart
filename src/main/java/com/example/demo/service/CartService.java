@@ -40,9 +40,8 @@ public class CartService {
         }
 
         Cart cart = new Cart();
+        cart.setMember(memberRepository.findById(member.getUsername()).orElseThrow());
         cart.setProduct(productRepository.findById(productId).orElseThrow());
-        cart.setMember(memberRepository.findById(1L).orElseThrow());
-
         cart.setCount(cartRequestDTO.getCount());
         cartRepository.save(cart);
     }
@@ -53,13 +52,6 @@ public class CartService {
                 .map(GetCartResponseDTO::new)
                 .collect(Collectors.toList());
     }
-
-    // Test
-//    public Cart getCart() {
-//        Cart cart = cartRepository.findByMemberIdAndProductId(3L,5L);
-//        System.out.println("cart 값 = " + cart.getCount());
-//        return cart;
-//    }
 
     public void deleteCart(CartDeleteRequestDTO cartDeleteRequestDTO) {
         Long cartid = cartDeleteRequestDTO.getId();

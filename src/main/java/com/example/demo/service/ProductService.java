@@ -48,7 +48,8 @@ public class ProductService {
     // 단건 조회
     public GetProductResponseDTO getShowProduct(Long id) {
 
-        Product product = productRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 상품이 없습니다. id=" + id));
+        Product product = productRepository.findById(id).
+                orElseThrow(() -> new IllegalArgumentException("해당 상품이 없습니다. id=" + id));
 
         return new GetProductResponseDTO(product);
     }
@@ -75,7 +76,13 @@ public class ProductService {
             OrderProduct orderProduct = new OrderProduct();
             orderProduct.setProduct(product);
 //            orderProduct.getProduct().setName(product.getName());
-            orderProduct.setOrderPrice((int) (product.getPrice() * (1 - product.getDisc())));
+            // Calculate orderPrice, handling case where price or disc is 0
+            double price = product.getPrice();
+            double disc = 1 - product.getDisc();
+            double orderPrice = (price == 0 || disc == 0) ? price : price * disc;
+            orderProduct.setOrderPrice((int) orderPrice);
+//            orderProduct.setOrderPrice((int) (product.getPrice() * product.getDisc()));
+
             // 제품 ID와 회원 ID 조합에 기반하여 카트 카운트를 검색합니다.
             // 매개변수 위치 주의
             if(quantity == 0) {
