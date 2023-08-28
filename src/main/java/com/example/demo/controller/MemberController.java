@@ -1,13 +1,16 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.GetComparePasswordDTO;
 import com.example.demo.dto.GetMemberResponseDTO;
 import com.example.demo.config.auth.PrincipalDetails;
+import com.example.demo.dto.MemberUpdateRequestDTO;
 import com.example.demo.entity.Member;
 import com.example.demo.repository.MemberRepository;
 import com.example.demo.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,16 +44,16 @@ public class MemberController {
     }
 
 
-    @GetMapping("/test")
-    public String testPrincipal() {
-//        System.out.println("Authentication = " + SecurityContextHolder.getContext().getAuthentication().toString());
-//        PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal(); // 세션 가져오기
-//        System.out.println("authentication = " + principalDetails.getUsername());
-        UsernamePasswordAuthenticationToken authentication =(UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
-        PrincipalDetails prin = (PrincipalDetails) authentication.getPrincipal();
-        Member m = prin.getMember();
-        return m.getRoles();
-    }
+//    @GetMapping("/test")
+//    public String testPrincipal() {
+////        System.out.println("Authentication = " + SecurityContextHolder.getContext().getAuthentication().toString());
+////        PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal(); // 세션 가져오기
+////        System.out.println("authentication = " + principalDetails.getUsername());
+//        UsernamePasswordAuthenticationToken authentication =(UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+//        PrincipalDetails prin = (PrincipalDetails) authentication.getPrincipal();
+//        Member m = prin.getMember();
+//        return m.getRoles();
+//    }
 
 
 //    @DeleteMapping
@@ -63,6 +66,16 @@ public class MemberController {
     @GetMapping("/select_member")
     public GetMemberResponseDTO findMember() {
         return memberService.getMember();
+    }
+
+    @PatchMapping("/update_member")
+    public void updateMember(@RequestBody MemberUpdateRequestDTO memberUpdateRequestDTO) {
+        memberService.updateMember(memberUpdateRequestDTO);
+    }
+    @PostMapping("/compare_password")
+    public Boolean findMember(@AuthenticationPrincipal Member member,
+                              @RequestBody GetComparePasswordDTO getComparePasswordDTO) {
+        return memberService.comparePassword(member, getComparePasswordDTO);
     }
 
 }

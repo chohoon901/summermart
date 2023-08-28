@@ -14,6 +14,9 @@ public class ProductDTO {
     private double disc;
     private int commentCount;
 
+    public ProductDTO() {
+    }
+
     public ProductDTO(Product product) {
         mainName = product.getSubCategory().getMainCategory().getMainName();
         subName = product.getSubCategory().getSubName();

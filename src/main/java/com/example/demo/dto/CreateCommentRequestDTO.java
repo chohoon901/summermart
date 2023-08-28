@@ -12,4 +12,5 @@ public class CreateCommentRequestDTO {
         comment.setBody(body);
         return comment;
     }
+
 }

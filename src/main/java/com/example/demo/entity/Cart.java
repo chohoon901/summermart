@@ -10,7 +10,7 @@ public class Cart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
@@ -44,5 +44,13 @@ public class Cart {
         cart.setCount(count);
 
         return cart;
+    }
+
+    public void addCount() {
+        this.count++;
+    }
+
+    public void deleteCount() {
+        this.count--;
     }
 }

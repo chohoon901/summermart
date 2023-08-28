@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.CommentDeleteRequestDTO;
+import com.example.demo.dto.CommentUpdateRequestDTO;
 import com.example.demo.dto.CreateCommentRequestDTO;
 import com.example.demo.dto.GetCommentResponseDTO;
 import com.example.demo.entity.Member;
@@ -28,5 +30,16 @@ public class CommentController {
     public List<GetCommentResponseDTO> showComment(@PathVariable Long productId,
                                                    @RequestHeader("Authorization") String authorizationHeader) {
         return commentService.getComments(productId);
+    }
+
+    @DeleteMapping("/delete_comment")
+    public void deleteMyLike(@RequestBody CommentDeleteRequestDTO commentDeleteRequestDTO) {
+        commentService.deleteComment(commentDeleteRequestDTO);
+
+    }
+
+    @PatchMapping("/update_comment")
+    public void updateComment(@RequestBody CommentUpdateRequestDTO commentUpdateRequestDTO) {
+        commentService.updateComment(commentUpdateRequestDTO);
     }
 }

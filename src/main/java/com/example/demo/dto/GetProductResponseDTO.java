@@ -12,7 +12,9 @@ public class GetProductResponseDTO {
     private String mainName;
     private double disc;
     private int commentCount;
-    public GetProductResponseDTO(Product product) {
+    private boolean isLiked;
+
+    public GetProductResponseDTO(Product product, boolean isLiked1) {
         mainName = product.getSubCategory().getMainCategory().getMainName();
         subName = product.getSubCategory().getSubName();
         picture = product.getPicture();
@@ -21,5 +23,6 @@ public class GetProductResponseDTO {
         price = product.getPrice();
         disc = product.getDisc();
         commentCount = product.getCommentCount();
+        isLiked = isLiked1;
     }
 }

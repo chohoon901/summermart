@@ -1,7 +1,9 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.GetComparePasswordDTO;
 import com.example.demo.dto.GetMemberResponseDTO;
 import com.example.demo.dto.MemberRequestDTO;
+import com.example.demo.dto.MemberUpdateRequestDTO;
 import com.example.demo.entity.Member;
 import com.example.demo.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -83,6 +85,38 @@ public class MemberService {
 //
 //        return new GetMemberResponseDTO(member);
 //    }
+
+    public void updateMember(MemberUpdateRequestDTO memberUpdateRequestDTO) {
+        Member member = memberRepository.findById(memberUpdateRequestDTO.getId())
+                .orElseThrow(()->new IllegalArgumentException("해당 회원이 없습니다. id="+memberUpdateRequestDTO.getId()));
+//        Member member = memberRepository.findById(3L)
+//                .orElseThrow(()->new IllegalArgumentException("해당 회원이 없습니다. id="+3L));
+        if(memberUpdateRequestDTO.getAddress()!=null){
+            member.setAddress(memberUpdateRequestDTO.getAddress());
+        }
+        if(memberUpdateRequestDTO.getUsername()!=null){
+            member.setUsername(memberUpdateRequestDTO.getUsername());
+        }
+        if(memberUpdateRequestDTO.getPassword()!=null){
+            member.setPassword(memberUpdateRequestDTO.getPassword());
+        }
+        if(memberUpdateRequestDTO.getName()!=null){
+            member.setName(memberUpdateRequestDTO.getName());
+        }
+        if(memberUpdateRequestDTO.getUsername()!=null){
+            member.setPhone(memberUpdateRequestDTO.getPhone());
+        }
+        memberRepository.save(member);
+    }
+
+    public Boolean comparePassword(Member member, GetComparePasswordDTO getComparePasswordDTO) {
+        boolean isCorrect = false;
+        String password = "1414";
+        if(password.equals(getComparePasswordDTO.getPassword())) {
+            isCorrect = true;
+        }
+        return isCorrect;
+    }
 
 
 

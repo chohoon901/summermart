@@ -1,12 +1,16 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.CartDeleteRequestDTO;
 import com.example.demo.dto.CartRequestDTO;
+import com.example.demo.dto.CartUpdateDTO;
 import com.example.demo.dto.GetCartResponseDTO;
 import com.example.demo.entity.Cart;
+import com.example.demo.entity.Member;
 import com.example.demo.repository.CartRepository;
 import com.example.demo.repository.MemberRepository;
 import com.example.demo.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,14 +34,30 @@ public class CartService {
 
     }
 
-    public List<GetCartResponseDTO> getAllCarts() {
-        return cartRepository.findAllByMember_Id(1L)
+    public List<GetCartResponseDTO> getAllCarts(Member member) {
+        return cartRepository.findByMemberUsername(member.getUsername())
                 .stream()
                 .map(GetCartResponseDTO::new)
                 .collect(Collectors.toList());
     }
-
     public void deleteCart(Long cartid) {
         cartRepository.deleteById(cartid);
     }
+
+    public void deleteCart(CartDeleteRequestDTO cartDeleteRequestDTO) {
+        Long cartid = cartDeleteRequestDTO.getId();
+        cartRepository.deleteById(cartid);
+    }
+
+    public void UpdateCart(CartUpdateDTO cartUpdateDTO){
+        Cart cart = cartRepository.findById(cartUpdateDTO.getId())
+                .orElseThrow(()->new IllegalArgumentException("해당 회원이 없습니다. id=" + cartUpdateDTO.getId()));
+        if (cartUpdateDTO.getUpdown() == 1) {
+            cart.addCount();
+        } else {
+            cart.deleteCount();
+        }
+        cartRepository.save(cart);
+    }
+
 }

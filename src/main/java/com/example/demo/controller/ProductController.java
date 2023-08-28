@@ -2,9 +2,11 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.GetProductResponseDTO;
 import com.example.demo.dto.ProductDTO;
+import com.example.demo.entity.Member;
 import com.example.demo.repository.ProductRepository;
 import com.example.demo.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,8 +28,9 @@ public class ProductController {
     }
 
     @GetMapping("/get_product/{id}")
-    public GetProductResponseDTO getShowProduct(@PathVariable Long id) {
-        return productService.getShowProduct(id);
+    public GetProductResponseDTO getShowProduct(@PathVariable Long id,
+                                                @AuthenticationPrincipal Member member) {
+        return productService.getShowProduct(id, member);
     }
 
 //    private final ProductService productService;
