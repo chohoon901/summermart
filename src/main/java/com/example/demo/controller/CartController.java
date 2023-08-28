@@ -20,7 +20,9 @@ public class CartController {
     private final CartService cartService;
 
     @PostMapping("/create_cart/{productId}")
-    public void createCart(@PathVariable Long productId, @RequestBody CartRequestDTO cartRequestDTO) {
+    public void createCart(@AuthenticationPrincipal Member member,
+                           @PathVariable Long productId,
+                           @RequestBody CartRequestDTO cartRequestDTO) {
         cartService.createCart(productId, cartRequestDTO);
     }
 
@@ -29,12 +31,6 @@ public class CartController {
                                                 @RequestHeader("Authorization") String authorizationHeader) {
         return cartService.getAllCarts(member);
     }
-
-    // test
-//    @GetMapping("/test_cart")
-//    public Cart getCart() {
-//        return cartService.getCart();
-//    }
 
     // Controller
     @DeleteMapping("/delete_cart")

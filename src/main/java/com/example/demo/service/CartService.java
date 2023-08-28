@@ -28,26 +28,18 @@ public class CartService {
     // id 1번인 member로 고정
     public void createCart(Long productId, CartRequestDTO cartRequestDTO) {
         Cart cart = new Cart();
-        cart.setMember(memberRepository.findById(3L).orElseThrow());
+        cart.setMember(memberRepository.findById(1L).orElseThrow());
         cart.setProduct(productRepository.findById(productId).orElseThrow());
         cart.setCount(cartRequestDTO.getCount());
         cartRepository.save(cart);
-
     }
 
     public List<GetCartResponseDTO> getAllCarts(Member member) {
-        return cartRepository.findAllByMember_Id(3L)
+        return cartRepository.findAllByMember_Id(1L)
                 .stream()
                 .map(GetCartResponseDTO::new)
                 .collect(Collectors.toList());
     }
-
-    // Test
-//    public Cart getCart() {
-//        Cart cart = cartRepository.findByMemberIdAndProductId(3L,5L);
-//        System.out.println("cart 값 = " + cart.getCount());
-//        return cart;
-//    }
 
     public void deleteCart(CartDeleteRequestDTO cartDeleteRequestDTO) {
         Long cartid = cartDeleteRequestDTO.getId();

@@ -20,7 +20,6 @@ public class ProductController {
 
     private final ProductService productService;
 
-
     @PostMapping("/create_product")
     public void createProductDto(@RequestBody ProductDTO productDTO) {
         productService.createProduct(productDTO);
@@ -31,6 +30,7 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
+    // 단건 조회
     @GetMapping("/get_product/{id}")
     public GetProductResponseDTO getShowProduct(@PathVariable Long id) {
         return productService.getShowProduct(id);

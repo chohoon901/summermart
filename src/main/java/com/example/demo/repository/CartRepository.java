@@ -14,10 +14,6 @@ public interface CartRepository extends JpaRepository <Cart, Long> {
 
     Cart findByMemberIdAndProductId(Long memberId, Long productId);
 
-    // Product To Orderproduct
-    @Query("SELECT c.count FROM Cart c WHERE c.member.id = :memberId AND c.product.id = :productId")
-    Integer findCountByMemberIdAndProductId(@Param("memberId") Long memberId, @Param("productId") Long productId);
-
 
     List<Cart> findAllByMember_Id(Long memberId);
 
