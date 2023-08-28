@@ -40,8 +40,8 @@ public class MyLikeService {
         MyLike myLike1 = new MyLike();
         myLike1.setProduct(productRepository.findById(productId).orElseThrow());
         // member.getid()
-        myLike1.setMember(memberRepository.findById(3L).orElseThrow());
-        myLikeRepository.deleteByMemberIdAndProductId(3L, productId);
+        myLike1.setMember(memberRepository.findByUsername(member.getUsername()));
+        myLikeRepository.deleteByMemberIdAndProductId(memberRepository.findByUsername(member.getUsername()).getId(), productId);
     }
 
 

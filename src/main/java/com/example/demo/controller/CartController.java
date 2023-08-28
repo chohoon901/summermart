@@ -1,10 +1,8 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.CartDeleteRequestDTO;
 import com.example.demo.dto.CartRequestDTO;
 import com.example.demo.dto.CartUpdateDTO;
 import com.example.demo.dto.GetCartResponseDTO;
-import com.example.demo.entity.Cart;
 import com.example.demo.entity.Member;
 import com.example.demo.service.CartService;
 import lombok.RequiredArgsConstructor;
@@ -25,8 +23,7 @@ public class CartController {
     }
 
     @GetMapping("/select_cart")
-    public List<GetCartResponseDTO> getAllCarts(@AuthenticationPrincipal Member member,
-                                                @RequestHeader("Authorization") String authorizationHeader) {
+    public List<GetCartResponseDTO> getAllCarts(@AuthenticationPrincipal Member member) {
         return cartService.getAllCarts(member);
     }
 

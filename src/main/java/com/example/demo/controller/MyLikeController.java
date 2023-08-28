@@ -1,10 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.GetMyLikeResponseDTO;
-import com.example.demo.dto.CreateCommentRequestDTO;
 import com.example.demo.dto.MyLikeDeleteRequestDTO;
 import com.example.demo.entity.Member;
-import com.example.demo.entity.MyLike;
 import com.example.demo.service.MyLikeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -52,3 +50,4 @@ public class MyLikeController {
     public void deleteMyLike(@RequestBody MyLikeDeleteRequestDTO myLikeDeleteRequestDTO) {
         myLikeService.deleteMyLike(myLikeDeleteRequestDTO);
     }
+}

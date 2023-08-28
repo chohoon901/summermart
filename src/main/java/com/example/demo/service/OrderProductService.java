@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.OrderProductRequestDTO;
+import com.example.demo.dto.OrderProductResponseDTO;
 import com.example.demo.dto.kakao.KakaoApproveResponse;
 import com.example.demo.entity.Member;
 import com.example.demo.entity.OrderProduct;
@@ -18,16 +18,16 @@ public class OrderProductService {
     private final OrderProductRepository orderProductRepository;
 
     // 리스트일 경우 map을 통해 DTO를 Entity로 바꿈
-    public List<OrderProductRequestDTO> getOrderProducts (Member member) {
+    public List<OrderProductResponseDTO> getOrderProducts (Member member) {
         return orderProductRepository.findByMemberUsername(member.getUsername())
                 .stream()
-                .map(OrderProductRequestDTO::new)
+                .map(OrderProductResponseDTO::new)
                 .collect(Collectors.toList());
     }
 
     public void createOrderProduct(KakaoApproveResponse kakaoApprove) {
-        OrderProductRequestDTO orderProductRequestDTO = new OrderProductRequestDTO();
-        OrderProduct orderProduct = orderProductRequestDTO.toEntity();
+        OrderProductResponseDTO orderProductResponseDTO = new OrderProductResponseDTO();
+        OrderProduct orderProduct = orderProductResponseDTO.toEntity();
         orderProduct.getProduct().setName(kakaoApprove.getItem_name());
         orderProduct.setCount(kakaoApprove.getQuantity());
         orderProduct.setOrderPrice(kakaoApprove.getAmount().getTotal());

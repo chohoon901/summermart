@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import com.example.demo.exception.NotEnoughStockException;
 import lombok.Data;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -31,11 +32,14 @@ public class Product {
     @JoinColumn(name = "subCategory_id")
     private SubCategory subCategory;
 
+    @Nullable
     private int stock;
     private String name;
     private int price;
     private String picture;
     private double disc;
+
+    @Nullable
     private int commentCount;
 
 

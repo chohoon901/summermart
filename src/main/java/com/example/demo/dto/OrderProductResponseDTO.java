@@ -1,35 +1,31 @@
 package com.example.demo.dto;
 
-import com.example.demo.dto.kakao.KakaoApproveResponse;
-import com.example.demo.entity.DeliveryStatus;
 import com.example.demo.entity.OrderProduct;
 import com.example.demo.entity.OrderStatus;
 import lombok.Data;
 
 @Data
-public class OrderProductRequestDTO {
+public class OrderProductResponseDTO {
     private Long id;
     private String name;
     private int price;
     private int count;
     private String picture;
-    private DeliveryStatus deliverystatus;
     private OrderStatus orderStatus;
 
-    public OrderProductRequestDTO(OrderProduct orderProduct) {
+    public OrderProductResponseDTO(OrderProduct orderProduct) {
         id = orderProduct.getId();
         name = orderProduct.getProduct().getName();
         price = orderProduct.getOrderPrice();
         count = orderProduct.getCount();
         picture = orderProduct.getProduct().getPicture();
-        deliverystatus = orderProduct.getOrders().getDeliveryStatus();
-        orderStatus = orderProduct.getOrders().getOrderStatus();
+        orderStatus = orderProduct.getOrderStatus();
     }
 
-    public OrderProductRequestDTO() {
+    public OrderProductResponseDTO() {
     }
 
-    //    public OrderProductRequestDTO(OrderProduct orderProduct, KakaoApproveResponse kakaoApprove) {
+    //    public OrderProductResponseDTO(OrderProduct orderProduct, KakaoApproveResponse kakaoApprove) {
 //        name = kakaoApprove.getItem_name();
 //        price = kakaoApprove.getAmount().getTotal();
 //        count = kakaoApprove.getQuantity();
@@ -44,8 +40,7 @@ public class OrderProductRequestDTO {
         orderProduct.setOrderPrice(price);
         orderProduct.setCount(count);
         orderProduct.getProduct().setPicture(picture);
-        orderProduct.getOrders().setDeliveryStatus(deliverystatus);
-        orderProduct.getOrders().setOrderStatus(orderStatus);
+        orderProduct.setOrderStatus(orderStatus);
         return orderProduct;
     }
 }

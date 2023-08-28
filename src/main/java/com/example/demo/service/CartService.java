@@ -8,6 +8,7 @@ import com.example.demo.entity.Member;
 import com.example.demo.entity.Member;
 import com.example.demo.entity.MyLike;
 import com.example.demo.entity.Product;
+import com.example.demo.exception.DuplicateProductException;
 import com.example.demo.repository.CartRepository;
 import com.example.demo.repository.MemberRepository;
 import com.example.demo.repository.MyLikeRepository;
@@ -16,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.DuplicateFormatFlagsException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -30,19 +32,20 @@ public class CartService {
 
     // id 1번인 member로 고정
     public void createCart(Long productId, CartRequestDTO cartRequestDTO) {
+
+        boolean productExistsInCart = cartRepository.existsByProductId(productId);
+
+        if (productExistsInCart) {
+            throw new DuplicateProductException("해당 상품은 카트에 이미 있습니다.");
+        }
+
         Cart cart = new Cart();
         cart.setProduct(productRepository.findById(productId).orElseThrow());
         cart.setMember(memberRepository.findById(1L).orElseThrow());
 
-//        if(restStock < 0) {
-//            throw new NotEnoughStockException("재고 부족");
-//        }
-
         cart.setCount(cartRequestDTO.getCount());
         cartRepository.save(cart);
-
     }
-
 
     public List<GetCartResponseDTO> getAllCarts(Member member) {
         return cartRepository.findByMemberUsername(member.getUsername())

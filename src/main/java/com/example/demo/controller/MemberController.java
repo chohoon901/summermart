@@ -2,16 +2,11 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.GetComparePasswordDTO;
 import com.example.demo.dto.GetMemberResponseDTO;
-import com.example.demo.config.auth.PrincipalDetails;
-import com.example.demo.dto.MemberRequestDTO;
 import com.example.demo.dto.MemberUpdateRequestDTO;
 import com.example.demo.entity.Member;
 import com.example.demo.repository.MemberRepository;
 import com.example.demo.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -59,7 +54,7 @@ public class MemberController {
     }
 
     // 정보 수정을 위한 비밀번호 재확인
-    @GetMapping("/compare_password")
+    @PostMapping("/compare_password")
     public Boolean findMember(@AuthenticationPrincipal Member member,
                               @RequestBody GetComparePasswordDTO getComparePasswordDTO) {
         return memberService.comparePassword(member, getComparePasswordDTO);

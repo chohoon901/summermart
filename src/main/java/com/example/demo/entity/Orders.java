@@ -3,7 +3,6 @@ package com.example.demo.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +12,7 @@ public class Orders {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
@@ -21,10 +20,6 @@ public class Orders {
 
     @OneToMany(mappedBy = "orders")
     private List<OrderProduct> orderProducts = new ArrayList<>();
-
-
-    @Enumerated(EnumType.STRING)
-    private DeliveryStatus deliveryStatus;
 
 
     private int count;
@@ -51,7 +46,7 @@ public class Orders {
             orders.addOrderItem(orderProduct);
         }
 
-        orders.setDeliveryStatus(DeliveryStatus.READY);
+//        orders.setDeliveryStatus(DeliveryStatus.READY);
 //        orders.setDate(LocalDateTime.now());
         return orders;
     }

@@ -40,8 +40,9 @@ public class ProductController {
     @PostMapping("/create_orderProduct")
     public void createOrderProducts(
             @RequestBody CreateOrderRequestDTO request,
+            @RequestParam("quantity") int quantity,
             @AuthenticationPrincipal Member member) {
-        productService.createOrderProductsFromProductIds(request.getProductIds(), member);
+        productService.createOrderProductsFromProductIds(request.getProductIds(), member, quantity);
 //        System.out.println("Json 값 : " + request.getProductIds());
 //        System.out.println("member 값 : " + member);
 

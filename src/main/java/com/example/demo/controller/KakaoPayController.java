@@ -32,7 +32,7 @@ public class KakaoPayController {
 
         KakaoApproveResponse kakaoApprove = kakaoPayService.approveResponse(pgToken);
         orderProductService.createOrderProduct(kakaoApprove);
-        return new ResponseEntity<>(kakaoApprove, HttpStatus.OK);
+        return "안씀";
     }
 //    /**
 //     * 결제 진행 중 취소

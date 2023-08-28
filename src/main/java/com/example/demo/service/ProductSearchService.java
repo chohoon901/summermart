@@ -28,6 +28,7 @@ public class ProductSearchService {
 
     private ProductSearchDTO convertToDTO(Product product) {
         ProductSearchDTO dto = new ProductSearchDTO();
+        dto.setId(product.getId());
         dto.setName(product.getName());
         dto.setPicture(product.getPicture());
         dto.setPrice(product.getPrice());

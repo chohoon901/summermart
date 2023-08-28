@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.OrderProductRequestDTO;
+import com.example.demo.dto.OrderProductResponseDTO;
 import com.example.demo.entity.Member;
 import com.example.demo.service.OrderProductService;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,7 @@ public class OrderProductController {
 
     // @AuthenticationPrincipal
     @GetMapping("/find_Orderproducts")
-    public List<OrderProductRequestDTO> findOps(@AuthenticationPrincipal Member member) {
+    public List<OrderProductResponseDTO> findOps(@AuthenticationPrincipal Member member) {
         return orderProductService.getOrderProducts(member);
     }
 }
