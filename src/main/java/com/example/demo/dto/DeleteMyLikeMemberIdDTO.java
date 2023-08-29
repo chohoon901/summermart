@@ -3,7 +3,6 @@ package com.example.demo.dto;
 import lombok.Data;
 
 @Data
-public class CartRequestDTO {
+public class DeleteMyLikeMemberIdDTO {
     private Long memberId;
-    private int count;
 }

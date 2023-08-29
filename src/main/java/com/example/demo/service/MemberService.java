@@ -7,6 +7,7 @@ import com.example.demo.dto.MemberUpdateRequestDTO;
 import com.example.demo.entity.Member;
 import com.example.demo.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,6 +33,7 @@ public class MemberService {
     // memberRepository와 연결
     // 서비스랑 필요한 repository 연결 -> RequiredArgsConstructor + private final
     private final MemberRepository memberRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     // 기능 하나 당 API 한개 ex) 저장은 저장기능 한개만
     // MemberDTO라는 음식을 Member라는 그릇에 담아서 save라는 전자레인지에 넣는다
@@ -76,10 +78,12 @@ public class MemberService {
 
     }
 
-    public Boolean comparePassword(Member member, GetComparePasswordDTO getComparePasswordDTO) {
+    public Boolean comparePassword(GetComparePasswordDTO getComparePasswordDTO) {
         boolean isCorrect = false;
 
-        if(member.getPassword().equals(getComparePasswordDTO.getPassword())) {
+        boolean passwordsMatch = new BCryptPasswordEncoder().matches(getComparePasswordDTO.getPassword(),
+                memberRepository.findById(getComparePasswordDTO.getMemberId()).orElseThrow().getPassword());
+        if(passwordsMatch) {
             isCorrect = true;
         }
         return isCorrect;
@@ -106,7 +110,7 @@ public class MemberService {
             member.setUsername(memberUpdateRequestDTO.getUsername());
         }
         if(memberUpdateRequestDTO.getPassword()!=null){
-            member.setPassword(memberUpdateRequestDTO.getPassword());
+            member.setPassword(bCryptPasswordEncoder.encode(memberUpdateRequestDTO.getPassword()));
         }
         if(memberUpdateRequestDTO.getName()!=null){
             member.setName(memberUpdateRequestDTO.getName());

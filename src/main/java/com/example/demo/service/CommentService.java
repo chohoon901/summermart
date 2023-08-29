@@ -22,11 +22,12 @@ public class CommentService {
     private final ProductRepository productRepository;
 
     @Transactional
-    public void createComment(CreateCommentRequestDTO createCommentRequestDTO, Long productId, Member member) {
+    public void createComment(CreateCommentRequestDTO createCommentRequestDTO, Long productId) {
         Long id = commentRepository.save(createCommentRequestDTO.toEntity()).getId();
         Comment comment = commentRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 유저 없음"));
 
-        comment.setMember(memberRepository.findByUsername(member.getUsername()));
+        System.out.println("createCommentRequestDTO.getMemberId() = " + createCommentRequestDTO.getMemberId());
+        comment.setMember(memberRepository.findById(createCommentRequestDTO.getMemberId()).orElseThrow());
 //        System.out.println("getUsername = " + member.getUsername());
         comment.setProduct(productRepository.findById(productId).orElseThrow());
         comment.getProduct().addComment();

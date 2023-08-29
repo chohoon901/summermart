@@ -22,6 +22,7 @@ public class ProductService {
     private final OrderProductRepository orderProductRepository;
     private final MemberRepository memberRepository;
     private final OrderRepository orderRepository;
+    private final MyLikeRepository myLikeRepository;
 
     // 상품 정보 생성
     public void createProduct(ProductDTO productDTO) {
@@ -46,15 +47,15 @@ public class ProductService {
     }
 
     // 단건 조회
-    public GetProductResponseDTO getShowProduct(Long id) {
+    public GetProductResponseDTO getShowProduct(Long id, Long memberId){
+        Member member1 = memberRepository.findById(memberId).orElseThrow();
+        Product product = productRepository.findById(id).orElseThrow(()->new IllegalArgumentException("해당 상품이 없습니다. id="+id));
+        boolean isLiked1 = myLikeRepository.existsByMemberAndProduct(member1, product);
 
-        Product product = productRepository.findById(id).
-                orElseThrow(() -> new IllegalArgumentException("해당 상품이 없습니다. id=" + id));
-
-        return new GetProductResponseDTO(product);
+        return new GetProductResponseDTO(product, isLiked1);
     }
 
-    public void createOrderProductsFromProductIds(String productIdsString, Member member, int quantity) {
+    public void createOrderProductsFromProductIds(String productIdsString, Long memberId , int quantity) {
         // 입력 문자열을 제품 ID들로 나누기 위해 쉼표로 구분된 문자열을 분할합니다.
         String[] productIdArray = productIdsString.split(",");
         List<Long> productIdList = new ArrayList<>();
@@ -66,7 +67,7 @@ public class ProductService {
         List<Product> products = productRepository.findByIdIn(productIdList);
         // 사용자 이름을 기반으로 회원 ID를 검색합니다.
         // 주의: 'findByUsername'의 결과를 'member' 변수에 할당해야 합니다.
-        Member user = memberRepository.findByUsername(member.getUsername());
+        Member user = memberRepository.findById(memberId).orElseThrow();
         List<OrderProduct> orderProducts = new ArrayList<>();
         Orders order = new Orders();
         // 각 제품에 대해 OrderProduct 인스턴스를 생성합니다.

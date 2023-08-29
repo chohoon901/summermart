@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class CreateCommentRequestDTO {
+    private Long memberId;
     private String body;
 
     public Comment toEntity() {

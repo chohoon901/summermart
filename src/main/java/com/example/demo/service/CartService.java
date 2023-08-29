@@ -40,14 +40,14 @@ public class CartService {
         }
 
         Cart cart = new Cart();
-        cart.setMember(memberRepository.findById(member.getUsername()).orElseThrow());
+        cart.setMember(memberRepository.findById(cartRequestDTO.getMemberId()).orElseThrow());
         cart.setProduct(productRepository.findById(productId).orElseThrow());
         cart.setCount(cartRequestDTO.getCount());
         cartRepository.save(cart);
     }
 
-    public List<GetCartResponseDTO> getAllCarts(Member member) {
-        return cartRepository.findByMemberUsername(member.getUsername())
+    public List<GetCartResponseDTO> getAllCarts(Long memberId) {
+        return cartRepository.findByMemberId(memberId)
                 .stream()
                 .map(GetCartResponseDTO::new)
                 .collect(Collectors.toList());

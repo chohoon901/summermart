@@ -17,9 +17,8 @@ public class CommentController {
 
     @PostMapping("/create_comment/{productId}")
     public void createComment(@RequestBody CreateCommentRequestDTO createCommentRequestDTO,
-                              @PathVariable Long productId,
-                              @AuthenticationPrincipal Member member) {
-        commentService.createComment(createCommentRequestDTO, productId, member);
+                              @PathVariable Long productId) {
+        commentService.createComment(createCommentRequestDTO, productId);
     }
 
     @GetMapping("/show_comments/{productId}")

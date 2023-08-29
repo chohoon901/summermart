@@ -55,9 +55,8 @@ public class MemberController {
 
     // 정보 수정을 위한 비밀번호 재확인
     @PostMapping("/compare_password")
-    public Boolean findMember(@AuthenticationPrincipal Member member,
-                              @RequestBody GetComparePasswordDTO getComparePasswordDTO) {
-        return memberService.comparePassword(member, getComparePasswordDTO);
+    public Boolean findMember(@RequestBody GetComparePasswordDTO getComparePasswordDTO) {
+        return memberService.comparePassword(getComparePasswordDTO);
     }
 
     @PatchMapping("/update_member")

@@ -5,7 +5,6 @@ import lombok.Data;
 
 @Data
 public class GetProductResponseDTO {
-//    private Long id;
     private String name;
     private int stock;
     private int price;
@@ -14,11 +13,9 @@ public class GetProductResponseDTO {
     private String mainName;
     private double disc;
     private int commentCount;
+    private boolean isLiked;
 
-
-    public GetProductResponseDTO(Product product) {
-
-//        id = product.getId();
+    public GetProductResponseDTO(Product product, boolean isLiked1) {
         mainName = product.getSubCategory().getMainCategory().getMainName();
         subName = product.getSubCategory().getSubName();
         picture = product.getPicture();
@@ -27,5 +24,6 @@ public class GetProductResponseDTO {
         price = product.getPrice();
         disc = product.getDisc();
         commentCount = product.getCommentCount();
+        isLiked = isLiked1;
     }
 }

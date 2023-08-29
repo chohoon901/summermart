@@ -18,15 +18,14 @@ public class CartController {
     private final CartService cartService;
 
     @PostMapping("/create_cart/{productId}")
-    public void createCart(@AuthenticationPrincipal Member member,
-                           @PathVariable Long productId,
+    public void createCart(@PathVariable Long productId,
                            @RequestBody CartRequestDTO cartRequestDTO) {
         cartService.createCart(productId, cartRequestDTO);
     }
 
     @GetMapping("/select_cart")
-    public List<GetCartResponseDTO> getAllCarts(@AuthenticationPrincipal Member member) {
-        return cartService.getAllCarts(member);
+    public List<GetCartResponseDTO> getAllCarts(@RequestParam("memberId") Long memberId) {
+        return cartService.getAllCarts(memberId);
     }
 
     // Controller

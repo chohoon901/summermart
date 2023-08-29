@@ -1,6 +1,8 @@
 package com.example.demo.repository;
 
+import com.example.demo.entity.Member;
 import com.example.demo.entity.MyLike;
+import com.example.demo.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,4 +18,5 @@ public interface MyLikeRepository extends JpaRepository <MyLike, Long> {
     @Transactional
     void deleteByMemberIdAndProductId(Long memberId, Long productId);
 
+    boolean existsByMemberAndProduct(Member member1, Product product);
 }

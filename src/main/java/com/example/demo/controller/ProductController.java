@@ -32,17 +32,17 @@ public class ProductController {
 
     // 단건 조회
     @GetMapping("/get_product/{id}")
-    public GetProductResponseDTO getShowProduct(@PathVariable Long id) {
-        return productService.getShowProduct(id);
+    public GetProductResponseDTO getShowProduct(@PathVariable Long id,
+                                                @RequestParam("memberId") Long memberId) {
+        return productService.getShowProduct(id, memberId);
     }
 
 
     @PostMapping("/create_orderProduct")
     public void createOrderProducts(
             @RequestBody CreateOrderRequestDTO request,
-            @RequestParam("quantity") int quantity,
-            @AuthenticationPrincipal Member member) {
-        productService.createOrderProductsFromProductIds(request.getProductIds(), member, quantity);
+            @RequestParam("quantity") int quantity) {
+        productService.createOrderProductsFromProductIds(request.getProductIds(), request.getMemberId(), quantity);
 //        System.out.println("Json 값 : " + request.getProductIds());
 //        System.out.println("member 값 : " + member);
 

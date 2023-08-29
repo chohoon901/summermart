@@ -1,9 +1,8 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.GetMyLikeResponseDTO;
+import com.example.demo.dto.*;
 import com.example.demo.entity.Member;
 import com.example.demo.entity.MyLike;
-import com.example.demo.dto.MyLikeDeleteRequestDTO;
 import com.example.demo.entity.Cart;
 import com.example.demo.entity.Member;
 import com.example.demo.entity.MyLike;
@@ -29,23 +28,24 @@ public class MyLikeService {
 
 
     // 성훈씨 작업물
-    public void createMyLikeById(Long productId, Member member) {
+    public void createMyLikeById(Long productId, CreateMyLikeMemberIdDTO createMyLikeMemberIdDTO) {
         MyLike myLike = new MyLike();
         myLike.setProduct(productRepository.findById(productId).orElseThrow());
-        myLike.setMember(memberRepository.findByUsername(member.getUsername()));
+        myLike.setMember(memberRepository.findById(createMyLikeMemberIdDTO.getMemberId()).orElseThrow());
         myLikeRepository.save(myLike);
     }
 
-    public void deleteMyLikeById(Long productId, Member member) {
+    public void deleteMyLikeById(Long productId, Long memberId) {
         MyLike myLike1 = new MyLike();
         myLike1.setProduct(productRepository.findById(productId).orElseThrow());
         // member.getid()
-        myLike1.setMember(memberRepository.findByUsername(member.getUsername()));
-        myLikeRepository.deleteByMemberIdAndProductId(memberRepository.findByUsername(member.getUsername()).getId(), productId);
+        myLike1.setMember(memberRepository.findById(memberId).orElseThrow());
+        myLikeRepository.deleteByMemberIdAndProductId(memberId, productId);
     }
 
 
-    public void postCart (Long id) {
+    public void postCart (MyLiketoCartRequestDTO myLiketoCartRequestDTO) {
+        Long id = myLiketoCartRequestDTO.getId();
         Optional<MyLike> mylike = myLikeRepository.findById(id);
         MyLike myLikeOne = mylike.get();
         //System.out.println("mylikeOne 출력= " + myLikeOne);
@@ -59,17 +59,15 @@ public class MyLikeService {
         cartRepository.save(cart1);
     }
 
-    public List<GetMyLikeResponseDTO> getAllLikes(Member member) {
-        Long id = memberRepository.findByUsername(member.getUsername()).getId();
-        return myLikeRepository.findAllByMember_Id(id)
+    public List<GetMyLikeResponseDTO> getAllLikes(Long memberId) {
+        return myLikeRepository.findAllByMember_Id(memberId)
                 .stream()
                 .map(GetMyLikeResponseDTO::new)
                 .collect(Collectors.toList());
     }
 
-    public void deleteMyLike(MyLikeDeleteRequestDTO myLikeDeleteRequestDTO) {
-        Long myLikeid = myLikeDeleteRequestDTO.getId();
-        myLikeRepository.deleteById(myLikeid);
+    public void deleteMyLike(Long id) {
+        myLikeRepository.deleteById(id);
     }
 
 }
