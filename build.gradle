@@ -51,6 +51,11 @@ tasks.named('test') {
 }
 
 
+jar {
+	enabled = false
+}
+
+
 //def frontendDir = "$projectDir/src/main/final"
 //
 //sourceSets {

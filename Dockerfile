@@ -12,13 +12,13 @@ RUN gradle build -x test --parallel --continue > /dev/null 2>&1 || true
 COPY . /build
 RUN gradle build -x test --parallel
 
-## APP
+# APP
 FROM openjdk:11.0
 WORKDIR /app
 #
 ## 빌더 이미지에서 jar 파일만 복사
-#COPY --from=builder /build/build/libs/*-SNAPSHOT.jar ./app.jar
-COPY --from=builder /build/build/libs/*.war ./app.jar
+COPY --from=builder /build/build/libs/*.jar ./app.jar
+#COPY --from=builder /build/build/libs/*.war ./app.jar
 #
 EXPOSE 8080
 #
