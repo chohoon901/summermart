@@ -26,7 +26,7 @@ public class RecommendController {
         System.out.println("input_word : " + input_word);
 
         // Set up the HTTP request
-        HttpPost httpPost = new HttpPost("http://localhost:5000/get_similar_products");
+        HttpPost httpPost = new HttpPost("http://192.168.0.164/:5000/get_similar_products");
         httpPost.setHeader("Accept", "application/json");
         httpPost.setHeader("Content-type", ContentType.APPLICATION_JSON);
 
